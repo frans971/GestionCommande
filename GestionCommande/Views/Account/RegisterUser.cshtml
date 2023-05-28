@@ -1,0 +1,161 @@
+﻿@model GestionCommande.Models.Entity.Utilisateur
+@{
+    ViewBag.Title = "Création";
+}
+
+<div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="@Url.Content("~/Content/BoucherieLogo.png")" alt="" width="72" height="57">
+    <h2>INSCRIPTION</h2>
+</div>
+
+<div class="container">
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-7 col-lg-8">
+
+            @using (Html.BeginForm("RegisterUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <form class="needs-validation" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <span style="color:red">
+                            @Html.ValidationSummary(true)
+                        </span>
+                        @if (ViewBag.Sucess != null)
+                        {
+                            <span style="color:green">
+                                @ViewBag.Sucess
+                            </span>
+                        }
+                        <div class="alert alert-danger d-none" id="errorMessage" role="alert">
+                            Le mot de passe et sa confirmation ne sont pas égaux
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group select">
+                            <label class="form-label">GENRE<span style="color:red">*</span></label>
+                            <br />
+                            @Html.DropDownListFor(model => model.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">NOM<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.nom, new { @Class = "form-control", @required = "required" })
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">PRENOM<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.prenom, new { @Class = "form-control", @required = "required" })
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">PSEUDO<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.identifiant, new { @Class = "form-control", @required = "required", @placeholder = "Ex :" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">EMAIL<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Adresse<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
+                        </div>
+
+                        <div class="col-12">
+                            @Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group select">
+                                <label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
+                                <br />
+                                @Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id="cpt", @required = "required" })
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            @Html.Label("VILLE", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword">Mot de passe<span style="color:red">*</span></label>
+                            @Html.PasswordFor(m => m.password, new { @class = "form-control input", onchange = "CheckConfirmPassword()" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputConfirmPassword">Confirmation de mot de passe<span style="color:red">*</span></label>
+                            <input type="password" class="form-control" id="inputConfirmPassword" onchange="CheckConfirmPassword()" placeholder="1234">
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <div class="mx-auto" style="width: 200px;">
+                        <button class="btn btn-primary btn-lg disabled" id="buttonCreate" type="submit">Enregistrer</button>
+                    </div>
+                </form>
+            }
+            </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#cpt").select2({
+                theme: "bootstrap-5"
+            });
+            $("#id_genre").select2({
+                theme: "bootstrap-5"
+            });
+
+        
+
+
+             $("#cpt").change(function () {
+                 if (($(this).val()) == "0") {
+                     document.getElementById("Commune_ville").value = "";
+                 }
+                 else {
+                     $.ajax({
+                         url: "@Url.Action("GetCommune", "Account")?codePostal=" + $(this).val(),
+                        success: function (data) {
+                            document.getElementById("Commune_ville").value = data;
+                    },
+                        error: function () {
+                            document.getElementById("Commune_ville").value = "Indisponible";
+                    }
+                });
+                 }
+
+             })
+        });
+
+        function CheckConfirmPassword() {
+           
+            var password = $('#password').val();
+            var confirmPassword = $('#inputConfirmPassword').val();
+
+            if (password == confirmPassword) {
+                $('#buttonCreate').removeClass('disabled');
+                $('#errorMessage').addClass('d-none');
+            }
+            else {
+                $('#buttonCreate').addClass('disabled');
+                $('#errorMessage').removeClass('d-none');
+            }
+
+        }
+
+    </script>
+
+}

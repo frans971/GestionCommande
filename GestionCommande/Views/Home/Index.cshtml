@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Accueil";
+}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Bienvenue</h1>
+            <p class="lead text-body-secondary">
+                Boucherie Galante innove et décide de proposer à ses clients de réserver leur commande
+                 et venir la récupérer au moment convenue
+            </p>
+            <p>
+                <a href="#" class="btn btn-outline-primary">Mes réservations</a>
+                <a href="@Url.Action("RegisterUser", "Account")" class="btn btn-danger my-2">S'incrire</a>
+            </p>
+        </div>
+    </div>
+</section>
