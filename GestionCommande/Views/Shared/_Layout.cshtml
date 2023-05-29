@@ -57,7 +57,7 @@
                             </ul>
                         </li>
                     </ul>
-                    @if (User.Identity.Name != null)
+                    @if (!User.Identity.Name.IsEmpty())
                     {
                         <div class="mx-4">
                             <ul class="navbar-nav mb-lg-0 mx-5">
@@ -73,9 +73,9 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                     }
-                    else
+                    @if (User.Identity.Name.IsEmpty())
                     {
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="btn-group me-2" role="group" aria-label="First group">

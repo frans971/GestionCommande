@@ -129,7 +129,8 @@ namespace GestionCommande.Controllers
         }
        public ActionResult Login()
         {
-            if(User.Identity.Name != null)
+            //si l'utilisateur est connecté alors on redirige l'utilisateur vers la page accueil
+            if(!User.Identity.Name.IsEmpty())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -160,7 +161,8 @@ namespace GestionCommande.Controllers
             if (entityLogin.VerifiedUserConnect(utilisateur))
             {
                 FormsAuthentication.SetAuthCookie(utilisateur.identifiant, true);
-                return RedirectToAction("Index", "Utilisateur");
+                return RedirectToAction("Index", "Home")
+                    ;
             }
             this.ModelState.AddModelError(string.Empty, "L'identifiant ou le mot de passe de l'utilisateur est incorrect");
             return this.View(account);
