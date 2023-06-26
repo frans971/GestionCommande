@@ -1,6 +1,7 @@
 ﻿using GestionCommande.Models.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -25,6 +26,11 @@ namespace GestionCommande.Models.EntityRepository
             db.SaveChanges();
         }
 
+        public void ModifyTokenUser(TokenPasswordUser tokenPassword)
+        {
+            db.Entry(tokenPassword).State = EntityState.Modified;
+            db.SaveChanges();
+        }
         public void DeleteToken (TokenPasswordUser tokenPasswordUser)
         {
             db.TokenPasswordUser.Remove(tokenPasswordUser);

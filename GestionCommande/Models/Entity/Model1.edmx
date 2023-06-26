@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GestionCommandeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GestionCommandeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="id_client" />
@@ -13,7 +13,7 @@
           <Property Name="id_genre" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="prenom" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="num_tel" Type="int" />
+          <Property Name="num_tel" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="mail" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="adresse" Type="varchar(max)" Nullable="false" />
           <Property Name="complement_adresse" Type="varchar(max)" />
@@ -156,7 +156,7 @@
           <Property Name="identifiant" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="nom" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="prenom" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="num_tel" Type="int" />
+          <Property Name="num_tel" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="mail" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="adresse" Type="varchar(max)" Nullable="false" />
           <Property Name="complement_adresse" Type="varchar(max)" />
@@ -458,7 +458,8 @@
             <End Role="Utilisateur" EntitySet="Utilisateur" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GestionCommandeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -470,7 +471,7 @@
           <Property Name="id_genre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="num_tel" Type="Int32" />
+          <Property Name="num_tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="complement_adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -595,6 +596,17 @@
           <Property Name="libelle_profil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User_Profil" Relationship="Self.FK__User_Prof__id_pr__3C69FB99" FromRole="Profil" ToRole="User_Profil" />
         </EntityType>
+        <EntityType Name="TokenPasswordUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idUtilisateur" Type="Int32" Nullable="false" />
+          <Property Name="validDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="commentaire" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK__TokenPass__idUti__6FE99F9F" FromRole="TokenPasswordUser" ToRole="Utilisateur" />
+        </EntityType>
         <EntityType Name="Type_livraison">
           <Key>
             <PropertyRef Name="id" />
@@ -622,7 +634,7 @@
           <Property Name="identifiant" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="num_tel" Type="Int32" />
+          <Property Name="num_tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="complement_adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -634,8 +646,8 @@
           <NavigationProperty Name="Commune" Relationship="Self.FK__Utilisateur__cpt__38996AB5" FromRole="Utilisateur" ToRole="Commune" />
           <NavigationProperty Name="Etat1" Relationship="Self.FK__Utilisateu__etat__37A5467C" FromRole="Utilisateur" ToRole="Etat" />
           <NavigationProperty Name="Genre" Relationship="Self.FK__Utilisate__id_ge__398D8EEE" FromRole="Utilisateur" ToRole="Genre" />
+          <NavigationProperty Name="TokenPasswordUser" Relationship="Self.FK__TokenPass__idUti__6FE99F9F" FromRole="Utilisateur" ToRole="TokenPasswordUser" />
           <NavigationProperty Name="User_Profil" Relationship="Self.FK__User_Prof__id_ut__3D5E1FD2" FromRole="Utilisateur" ToRole="User_Profil" />
-          <NavigationProperty Name="TokenPasswordUser" Relationship="GestionCommandeModel.FK__TokenPass__idUti__6FE99F9F" FromRole="Utilisateur" ToRole="TokenPasswordUser" />
         </EntityType>
         <Association Name="FK__Client__cpt__403A8C7D">
           <End Role="Commune" Type="Self.Commune" Multiplicity="1" />
@@ -793,6 +805,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TokenPass__idUti__6FE99F9F">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="TokenPasswordUser" Type="Self.TokenPasswordUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="TokenPasswordUser">
+              <PropertyRef Name="idUtilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__User_Prof__id_ut__3D5E1FD2">
           <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
           <End Role="User_Profil" Type="Self.User_Profil" Multiplicity="*" />
@@ -823,6 +847,7 @@
           <EntitySet Name="Livraison_commande" EntityType="Self.Livraison_commande" />
           <EntitySet Name="Produit" EntityType="Self.Produit" />
           <EntitySet Name="Profil" EntityType="Self.Profil" />
+          <EntitySet Name="TokenPasswordUser" EntityType="Self.TokenPasswordUser" />
           <EntitySet Name="Type_livraison" EntityType="Self.Type_livraison" />
           <EntitySet Name="User_Profil" EntityType="Self.User_Profil" />
           <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" />
@@ -878,6 +903,10 @@
             <End Role="Profil" EntitySet="Profil" />
             <End Role="User_Profil" EntitySet="User_Profil" />
           </AssociationSet>
+          <AssociationSet Name="FK__TokenPass__idUti__6FE99F9F" Association="Self.FK__TokenPass__idUti__6FE99F9F">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="TokenPasswordUser" EntitySet="TokenPasswordUser" />
+          </AssociationSet>
           <AssociationSet Name="FK__User_Prof__id_ut__3D5E1FD2" Association="Self.FK__User_Prof__id_ut__3D5E1FD2">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="User_Profil" EntitySet="User_Profil" />
@@ -886,35 +915,7 @@
             <End Role="Produit" EntitySet="Produit" />
             <End Role="Commandes" EntitySet="Commandes" />
           </AssociationSet>
-          <EntitySet Name="TokenPasswordUser" EntityType="GestionCommandeModel.TokenPasswordUser" />
-          <AssociationSet Name="FK__TokenPass__idUti__6FE99F9F" Association="GestionCommandeModel.FK__TokenPass__idUti__6FE99F9F">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="TokenPasswordUser" EntitySet="TokenPasswordUser" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="TokenPasswordUser">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="token" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="idUtilisateur" Type="Int32" Nullable="false" />
-          <Property Name="validDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="commentaire" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Utilisateur" Relationship="GestionCommandeModel.FK__TokenPass__idUti__6FE99F9F" FromRole="TokenPasswordUser" ToRole="Utilisateur" />
-        </EntityType>
-        <Association Name="FK__TokenPass__idUti__6FE99F9F">
-          <End Type="GestionCommandeModel.Utilisateur" Role="Utilisateur" Multiplicity="1" />
-          <End Type="GestionCommandeModel.TokenPasswordUser" Role="TokenPasswordUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id_utilisateur" />
-            </Principal>
-            <Dependent Role="TokenPasswordUser">
-              <PropertyRef Name="idUtilisateur" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1044,6 +1045,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TokenPasswordUser">
+            <EntityTypeMapping TypeName="GestionCommandeModel.TokenPasswordUser">
+              <MappingFragment StoreEntitySet="TokenPasswordUser">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="idUtilisateur" ColumnName="idUtilisateur" />
+                <ScalarProperty Name="validDate" ColumnName="validDate" />
+                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Type_livraison">
             <EntityTypeMapping TypeName="GestionCommandeModel.Type_livraison">
               <MappingFragment StoreEntitySet="Type_livraison">
@@ -1089,17 +1101,6 @@
               <ScalarProperty Name="id_commande" ColumnName="id_commande" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="TokenPasswordUser">
-            <EntityTypeMapping TypeName="GestionCommandeModel.TokenPasswordUser">
-              <MappingFragment StoreEntitySet="TokenPasswordUser">
-                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
-                <ScalarProperty Name="validDate" ColumnName="validDate" />
-                <ScalarProperty Name="idUtilisateur" ColumnName="idUtilisateur" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
