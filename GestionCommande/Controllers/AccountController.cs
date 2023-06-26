@@ -92,7 +92,7 @@ namespace GestionCommande.Controllers
             }
             if(utilisateur.num_tel.ToString().Length < 9)
             {
-                this.ModelState.AddModelError(string.Empty, "Le numéro de téléphone n'estv pas valide");
+                this.ModelState.AddModelError(string.Empty, "Le numéro de téléphone n'est pas valide");
                 utilisateur.password = null;
                 return View(utilisateur);
             }
@@ -116,7 +116,7 @@ namespace GestionCommande.Controllers
                 string message = "Bienvenue " + utilisateur.nom + " " + utilisateur.prenom + " sur GestionCommande";
                 //Task.Run(() => SendMail.SendMailRegisterUser(utilisateur, message));
                 utilisateur = new Utilisateur();
-                ViewBag.Sucess = "Votre compte a été créé avec succès.";
+                ViewBag.success = "Votre compte a été créé avec succès.";
                 return View(utilisateur);
             }
             catch
@@ -219,6 +219,8 @@ namespace GestionCommande.Controllers
                     utilisateurModify.password = GethashPassword(utilisateur.password);
                     utilisateurModify.date_modif = DateTime.Now.Date;
                     entityUtilisateur.ModifyUtilisateur(utilisateurModify);
+                    tokenUtilisateur.validDate = DateTime.Now;
+                    entityTokenPasswordUser.ModifyTokenUser(tokenUtilisateur);
                     ViewBag.SuccessChangePassword = "Votre mot de passe a été réinitialiser avec succès";
                     //on réinitilise l'objet utilisateur
                     utilisateur = null;
@@ -292,13 +294,24 @@ namespace GestionCommande.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-
+        //fonction qui permet d'acéder à son compte utilisateur 
+        public ActionResult MyAccount(int id_utilisateur)
+        {
+            Utilisateur utilisateur = entityUtilisateur.GetUtilisateurById(id_utilisateur);
+            if(utilisateur.identifiant == User.Identity.Name)
+            {
+                //on récupère le nombre de commande passé par l'utilisateur
+                return View(utilisateur);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
+        }
         public string GethashPassword(string password)
         {
-
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
-
-
             return passwordHash;
         }
 

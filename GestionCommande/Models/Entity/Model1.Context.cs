@@ -38,9 +38,9 @@ namespace GestionCommande.Models.Entity
         public virtual DbSet<Livraison_commande> Livraison_commande { get; set; }
         public virtual DbSet<Produit> Produit { get; set; }
         public virtual DbSet<Profil> Profil { get; set; }
+        public virtual DbSet<TokenPasswordUser> TokenPasswordUser { get; set; }
         public virtual DbSet<Type_livraison> Type_livraison { get; set; }
         public virtual DbSet<User_Profil> User_Profil { get; set; }
         public virtual DbSet<Utilisateur> Utilisateur { get; set; }
-        public virtual DbSet<TokenPasswordUser> TokenPasswordUser { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace GestionCommande.Models.Entity
         public string id_genre { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
-        public Nullable<int> num_tel { get; set; }
+        public string num_tel { get; set; }
         public string mail { get; set; }
         public string adresse { get; set; }
         public string complement_adresse { get; set; }

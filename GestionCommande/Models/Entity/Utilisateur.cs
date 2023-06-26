@@ -17,8 +17,8 @@ namespace GestionCommande.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilisateur()
         {
-            this.User_Profil = new HashSet<User_Profil>();
             this.TokenPasswordUser = new HashSet<TokenPasswordUser>();
+            this.User_Profil = new HashSet<User_Profil>();
         }
     
         public int id_utilisateur { get; set; }
@@ -26,7 +26,7 @@ namespace GestionCommande.Models.Entity
         public string identifiant { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
-        public Nullable<int> num_tel { get; set; }
+        public string num_tel { get; set; }
         public string mail { get; set; }
         public string adresse { get; set; }
         public string complement_adresse { get; set; }
@@ -40,8 +40,8 @@ namespace GestionCommande.Models.Entity
         public virtual Etat Etat1 { get; set; }
         public virtual Genre Genre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Profil> User_Profil { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TokenPasswordUser> TokenPasswordUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Profil> User_Profil { get; set; }
     }
 }
