@@ -14,9 +14,16 @@ namespace GestionCommande.Models.Entity
     
     public partial class Disponibilite
     {
-        public int id_disponibilite { get; set; }
-        public Nullable<System.DateTime> date_disponibilite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Disponibilite()
+        {
+            this.Disponibilite_produit = new HashSet<Disponibilite_produit>();
+        }
     
-        public virtual Disponibilite_produit Disponibilite_produit { get; set; }
+        public int id { get; set; }
+        public System.DateTime date_disponibilite { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disponibilite_produit> Disponibilite_produit { get; set; }
     }
 }

@@ -18,18 +18,19 @@ namespace GestionCommande.Models.Entity
         public Produit()
         {
             this.Disponibilite_produit = new HashSet<Disponibilite_produit>();
-            this.Commandes = new HashSet<Commandes>();
+            this.Etat_Produit = new HashSet<Etat_Produit>();
+            this.Produit_Commande = new HashSet<Produit_Commande>();
         }
     
-        public int id_produit { get; set; }
+        public int id { get; set; }
         public string libelle_produit { get; set; }
         public Nullable<decimal> prix { get; set; }
-        public int etat_produit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disponibilite_produit> Disponibilite_produit { get; set; }
-        public virtual Etat_Produit Etat_Produit1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commandes> Commandes { get; set; }
+        public virtual ICollection<Etat_Produit> Etat_Produit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produit_Commande> Produit_Commande { get; set; }
     }
 }

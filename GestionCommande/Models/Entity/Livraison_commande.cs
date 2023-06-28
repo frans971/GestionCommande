@@ -14,7 +14,7 @@ namespace GestionCommande.Models.Entity
     
     public partial class Livraison_commande
     {
-        public int id_liv_comm { get; set; }
+        public int id { get; set; }
         public int id_livraison { get; set; }
         public int id_commande { get; set; }
     

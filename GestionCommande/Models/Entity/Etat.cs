@@ -18,6 +18,7 @@ namespace GestionCommande.Models.Entity
         public Etat()
         {
             this.Utilisateur = new HashSet<Utilisateur>();
+            this.Etat_Produit = new HashSet<Etat_Produit>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,7 @@ namespace GestionCommande.Models.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Utilisateur> Utilisateur { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Etat_Produit> Etat_Produit { get; set; }
     }
 }

@@ -12,13 +12,13 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Etat_Produit
+    public partial class Produit_Commande
     {
         public int id { get; set; }
-        public int id_etat { get; set; }
+        public Nullable<int> id_commande { get; set; }
         public int id_produit { get; set; }
     
-        public virtual Etat Etat { get; set; }
+        public virtual Commandes Commandes { get; set; }
         public virtual Produit Produit { get; set; }
     }
 }

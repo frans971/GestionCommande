@@ -32,11 +32,13 @@ namespace GestionCommande.Models.Entity
         public virtual DbSet<Disponibilite_produit> Disponibilite_produit { get; set; }
         public virtual DbSet<Etat> Etat { get; set; }
         public virtual DbSet<Etat_Produit> Etat_Produit { get; set; }
+        public virtual DbSet<Fidelite> Fidelite { get; set; }
         public virtual DbSet<Fidelite_Client> Fidelite_Client { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Livraison> Livraison { get; set; }
         public virtual DbSet<Livraison_commande> Livraison_commande { get; set; }
         public virtual DbSet<Produit> Produit { get; set; }
+        public virtual DbSet<Produit_Commande> Produit_Commande { get; set; }
         public virtual DbSet<Profil> Profil { get; set; }
         public virtual DbSet<TokenPasswordUser> TokenPasswordUser { get; set; }
         public virtual DbSet<Type_livraison> Type_livraison { get; set; }

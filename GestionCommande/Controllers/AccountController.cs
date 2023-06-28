@@ -19,7 +19,6 @@ namespace GestionCommande.Controllers
 {
     public class AccountController : Controller
     {
-        private RequeteLogin entityLogin = new RequeteLogin();
         private RequeteTokenPasswordUser entityTokenPasswordUser = new RequeteTokenPasswordUser();
         private RequeteUtilisateur entityUtilisateur = new RequeteUtilisateur();
         private RequeteCommune entityCommune = new RequeteCommune();
@@ -158,9 +157,11 @@ namespace GestionCommande.Controllers
 
             //on hash le mot de passe 
             utilisateur.password = account.Password;
-            if (entityLogin.VerifiedUserConnect(utilisateur))
+
+            Utilisateur userVerified = entityUtilisateur.VerifiedUserConnect(utilisateur);
+            if (userVerified != null)
             {
-                FormsAuthentication.SetAuthCookie(utilisateur.identifiant, true);
+                FormsAuthentication.SetAuthCookie(userVerified.identifiant, true);
                 return RedirectToAction("Index", "Home")
                     ;
             }
@@ -199,7 +200,7 @@ namespace GestionCommande.Controllers
         public ActionResult ChangePassword(Utilisateur utilisateur)
         {
 
-            TokenPasswordUser tokenUtilisateur = entityTokenPasswordUser.GetTokenByUser(utilisateur.id_utilisateur);
+            TokenPasswordUser tokenUtilisateur = entityTokenPasswordUser.GetTokenByUser(utilisateur.id);
             //on verifie si le token est valide ou pas 
             if (tokenUtilisateur.validDate <= DateTime.Now)
             {
@@ -208,7 +209,7 @@ namespace GestionCommande.Controllers
             }
             try
             {
-                Utilisateur utilisateurModify = entityUtilisateur.GetUtilisateurById(utilisateur.id_utilisateur);
+                Utilisateur utilisateurModify = entityUtilisateur.GetUtilisateurById(utilisateur.id);
                 if(utilisateurModify == null){
                     ViewBag.ErrorChangePassword = "Impossible de réinitialiser le mot de passe";
                     return View(utilisateur);
@@ -252,7 +253,7 @@ namespace GestionCommande.Controllers
                 Utilisateur utilisateur = entityUtilisateur.GetUtilisateurByEmail(email);
 
                 //on vérifie si il existe déjà un token pour cet utilisateur  
-                TokenPasswordUser oldTokenPassword = entityTokenPasswordUser.GetTokenPasswordByUtilisateur(utilisateur.id_utilisateur);
+                TokenPasswordUser oldTokenPassword = entityTokenPasswordUser.GetTokenPasswordByUtilisateur(utilisateur.id);
                 
                 if(oldTokenPassword != null)
                 {
@@ -262,7 +263,7 @@ namespace GestionCommande.Controllers
                 //On génère un token qu'on insère en bdd 
                 TokenPasswordUser newTokenPasswordUser= new TokenPasswordUser();
                 newTokenPasswordUser.token = GenerateTokenPassword();
-                newTokenPasswordUser.idUtilisateur = utilisateur.id_utilisateur;
+                newTokenPasswordUser.idUtilisateur = utilisateur.id;
                 newTokenPasswordUser.validDate = DateTime.Now.AddMinutes(15);
 
                 entityTokenPasswordUser.AddtokenUser(newTokenPasswordUser);

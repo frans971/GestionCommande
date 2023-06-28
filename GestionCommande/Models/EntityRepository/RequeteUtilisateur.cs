@@ -32,7 +32,7 @@ namespace GestionCommande.Models.EntityRepository
 
         public Utilisateur GetUtilisateurById(int id)
         {
-            return db.Utilisateur.Where(u => u.id_utilisateur == id).FirstOrDefault();
+            return db.Utilisateur.Where(u => u.id == id).FirstOrDefault();
         }
 
         public Utilisateur GetUtilisateurByEmail(string email)
@@ -83,5 +83,28 @@ namespace GestionCommande.Models.EntityRepository
             }
         }
 
+        public Utilisateur VerifiedUserConnect(Utilisateur utilisateur)
+        {
+            Utilisateur userConnect = new Utilisateur();
+            if (utilisateur.identifiant != null)
+            {
+                userConnect = db.Utilisateur.Where(u => u.identifiant == utilisateur.identifiant).FirstOrDefault();
+            }
+            else
+            {
+                userConnect = db.Utilisateur.Where(u => u.mail == utilisateur.mail).FirstOrDefault();
+            }
+            if (userConnect != null)
+            {
+                bool verified = BCrypt.Net.BCrypt.Verify(utilisateur.password, userConnect.password);
+                if (verified)
+                {
+                    return userConnect;
+                }
+                else
+                    return null;
+            }
+            return null;
+        }
     }
 }

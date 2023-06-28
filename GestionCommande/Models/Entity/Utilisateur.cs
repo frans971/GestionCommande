@@ -17,15 +17,18 @@ namespace GestionCommande.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilisateur()
         {
+            this.Fidelite = new HashSet<Fidelite>();
+            this.Fidelite1 = new HashSet<Fidelite>();
             this.TokenPasswordUser = new HashSet<TokenPasswordUser>();
             this.User_Profil = new HashSet<User_Profil>();
         }
     
-        public int id_utilisateur { get; set; }
+        public int id { get; set; }
         public string id_genre { get; set; }
         public string identifiant { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
+        public Nullable<System.DateTime> date_naissance { get; set; }
         public string num_tel { get; set; }
         public string mail { get; set; }
         public string adresse { get; set; }
@@ -38,6 +41,10 @@ namespace GestionCommande.Models.Entity
     
         public virtual Commune Commune { get; set; }
         public virtual Etat Etat1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fidelite> Fidelite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fidelite> Fidelite1 { get; set; }
         public virtual Genre Genre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TokenPasswordUser> TokenPasswordUser { get; set; }
