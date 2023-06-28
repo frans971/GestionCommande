@@ -4,40 +4,47 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b930c3f494af4d458bf4065688da00ef" Name="Diagram1">
-        <EntityTypeShape EntityType="GestionCommandeModel.Client" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Commandes" Width="1.5" PointX="13.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Commune" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Disponibilite" Width="1.5" PointX="11" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Disponibilite_produit" Width="1.5" PointX="13.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Etat" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Etat_Produit" Width="1.5" PointX="8.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Fidelite_Client" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Genre" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Livraison" Width="1.5" PointX="13.25" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Livraison_commande" Width="1.5" PointX="15.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Produit" Width="1.5" PointX="11" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Profil" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.TokenPasswordUser" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Type_livraison" Width="1.5" PointX="11" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.User_Profil" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.Utilisateur" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Client__cpt__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Client__id_genre__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Fidelite___id_cl__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Livraison__id_co__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Utilisateur__cpt__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Disponibi__id_di__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Disponibi__id_pr__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Utilisateu__etat__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Produit__etat_pr__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Utilisate__id_ge__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Livraison__id_li__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__Livraison__id_ty__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__User_Prof__id_pr__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__TokenPass__idUti__6FE99F9F" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.FK__User_Prof__id_ut__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionCommandeModel.Detail_commande" ManuallyRouted="false" />
+      <Diagram DiagramId="9950586ddb9044aa886c9b5ce4d8ff5c" Name="Diagram1">
+        <EntityTypeShape EntityType="GestionCommandeModel.Client" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Commandes" Width="1.5" PointX="12.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Commune" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Disponibilite" Width="1.5" PointX="12.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Disponibilite_produit" Width="1.5" PointX="15" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Etat" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Etat_Produit" Width="1.5" PointX="15" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Fidelite" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Fidelite_Client" Width="1.5" PointX="10.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Genre" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Livraison" Width="1.5" PointX="12.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Livraison_commande" Width="1.5" PointX="15" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Produit" Width="1.5" PointX="12.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Produit_Commande" Width="1.5" PointX="15" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Profil" Width="1.5" PointX="9" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.TokenPasswordUser" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Type_livraison" Width="1.5" PointX="10.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.User_Profil" Width="1.5" PointX="11.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionCommandeModel.Utilisateur" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Client__genre" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Client_Commune" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Fidelite_Client_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Livraison_commande_Commandes" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Produit_Commande_Commandes" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Utilisateur__Commune" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Disponibilite_produit_Disponibilite" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Disponibilite_produit_Produit" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Utilisateu__etat" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Etat_Produit_Etat" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Etat_Produit_Produit" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Fidelite_Client_Fidelite" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Fidelite_Utilisateur" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Fidelite_Utilisateur_modif" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Utilisateur__id_genre" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__Livraison__Type_Livraison" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Livraison_commande_Livraison" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK_Produit_Commande_Produit" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__User_Profil_Profil" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__TokenPass_Utilisateur" ManuallyRouted="false" />
+        <AssociationConnector Association="GestionCommandeModel.FK__User_Profil_Utilisateur" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

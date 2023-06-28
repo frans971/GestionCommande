@@ -18,16 +18,19 @@ namespace GestionCommande.Models.Entity
         public Commandes()
         {
             this.Livraison_commande = new HashSet<Livraison_commande>();
+            this.Produit_Commande = new HashSet<Produit_Commande>();
         }
     
-        public int id_commande { get; set; }
+        public int id { get; set; }
         public Nullable<System.DateTime> date_commande { get; set; }
         public Nullable<System.DateTime> date_livraison { get; set; }
         public string etat_commande { get; set; }
+        public int id_client { get; set; }
         public Nullable<decimal> montant { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Livraison_commande> Livraison_commande { get; set; }
-        public virtual Produit Produit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produit_Commande> Produit_Commande { get; set; }
     }
 }

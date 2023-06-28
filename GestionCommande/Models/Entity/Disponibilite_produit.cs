@@ -14,7 +14,7 @@ namespace GestionCommande.Models.Entity
     
     public partial class Disponibilite_produit
     {
-        public int id_disponibilite_produit { get; set; }
+        public int id { get; set; }
         public int id_disponibilite { get; set; }
         public int id_produit { get; set; }
     

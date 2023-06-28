@@ -20,13 +20,13 @@ namespace GestionCommande.Models.Entity
             this.Livraison_commande = new HashSet<Livraison_commande>();
         }
     
-        public int id_livraison { get; set; }
+        public int id { get; set; }
         public int id_typeLivraison { get; set; }
         public string creneau_horaire { get; set; }
         public double prix { get; set; }
     
+        public virtual Type_livraison Type_livraison { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Livraison_commande> Livraison_commande { get; set; }
-        public virtual Type_livraison Type_livraison { get; set; }
     }
 }

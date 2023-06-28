@@ -16,8 +16,10 @@ namespace GestionCommande.Models.Entity
     {
         public int carte_fidelite { get; set; }
         public int id_client { get; set; }
+        public int id_fidelite { get; set; }
         public int pt_fidelite { get; set; }
     
         public virtual Client Client { get; set; }
+        public virtual Fidelite Fidelite { get; set; }
     }
 }

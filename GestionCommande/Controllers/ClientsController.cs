@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace GestionCommande.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
         private RequeteCommune entityCommune = new RequeteCommune();
