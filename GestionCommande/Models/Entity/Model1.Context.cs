@@ -40,7 +40,6 @@ namespace GestionCommande.Models.Entity
         public virtual DbSet<Produit> Produit { get; set; }
         public virtual DbSet<Produit_Commande> Produit_Commande { get; set; }
         public virtual DbSet<Profil> Profil { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TokenPasswordUser> TokenPasswordUser { get; set; }
         public virtual DbSet<Type_livraison> Type_livraison { get; set; }
         public virtual DbSet<User_Profil> User_Profil { get; set; }
