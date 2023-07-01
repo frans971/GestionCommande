@@ -223,6 +223,9 @@
     <Compile Include="Models\Entity\Profil.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\TokenPasswordUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

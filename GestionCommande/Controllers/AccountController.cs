@@ -68,39 +68,49 @@ namespace GestionCommande.Controllers
             ViewBag.selectListGenre = selectListGenre;
             ViewBag.selectListCommune = selectListCPT;
 
-            ////////////////////////
-            //on vérifie que le le psueod ne comporte pas d' @ ni de .com
-            if (utilisateur.identifiant.Contains("@") && utilisateur.identifiant.Contains(".com") || utilisateur.identifiant.Length <5)
+            try
             {
-                this.ModelState.AddModelError(string.Empty, "Le pseudo n'est pas valide ou trop petit");
-                utilisateur.password = null;
-                return View(utilisateur);
-            }
+                ////////////////////////
+                //on vérifie que le le pseudo ne comporte pas d' @ ni de .com
+                if (utilisateur.identifiant.Contains("@") && utilisateur.identifiant.Contains(".com") || utilisateur.identifiant.Length < 5)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Le pseudo n'est pas valide ou trop petit");
+                    utilisateur.password = null;
+                    return View(utilisateur);
+                }
                 //on verifie que l'adresse mail et le pseudo sont bien unique 
-            if (entityUtilisateur.CheckUniqueValue(utilisateur.mail) == true)
-            {
-                this.ModelState.AddModelError(string.Empty, "Cette adresse mail est déjà utilisée");
-                utilisateur.password= null;
-                return View(utilisateur);
+                if (entityUtilisateur.CheckUniqueValue(utilisateur.mail) == true)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Cette adresse mail est déjà utilisée");
+                    utilisateur.password = null;
+                    return View(utilisateur);
+                }
+                if (entityUtilisateur.CheckUniqueValue(utilisateur.identifiant) == true)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Le pseudo est déjà utilisée");
+                    utilisateur.password = null;
+                    return View(utilisateur);
+                }
+                if (utilisateur.num_tel.ToString().Length < 9)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Le numéro de téléphone n'est pas valide");
+                    utilisateur.password = null;
+                    return View(utilisateur);
+                }
+                if (utilisateur.password.Length < 8)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Le mot de passe est trop court");
+                    utilisateur.password = null;
+                    return View(utilisateur);
+                }
             }
-            if (entityUtilisateur.CheckUniqueValue(utilisateur.identifiant) == true)
+            catch
             {
-                this.ModelState.AddModelError(string.Empty, "Le pseudo est déjà utilisée");
+                this.ModelState.AddModelError(string.Empty, "Une erreur s'est produite : impossible d'ajouter créer le compte");
                 utilisateur.password = null;
                 return View(utilisateur);
             }
-            if(utilisateur.num_tel.ToString().Length < 9)
-            {
-                this.ModelState.AddModelError(string.Empty, "Le numéro de téléphone n'est pas valide");
-                utilisateur.password = null;
-                return View(utilisateur);
-            }
-            if (utilisateur.password.Length < 8)
-            {
-                this.ModelState.AddModelError(string.Empty, "Le mot de passe est trop court");
-                utilisateur.password = null;
-                return View(utilisateur);
-            }
+            
 
             //on met en majuscule le nom, le prenom et l'adresse de l'utilisateur
             utilisateur.nom = utilisateur.nom.ToUpper();
