@@ -361,3 +361,30 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/GestionCommande/Models/Entity/Utilisateur.cs
+/GestionCommande/Models/Entity/User_Profil.cs
+/GestionCommande/Models/Entity/Type_livraison.cs
+/GestionCommande/Models/Entity/TokenPasswordUser.cs
+/GestionCommande/Models/Entity/sysdiagrams.cs
+/GestionCommande/Models/Entity/Profil.cs
+/GestionCommande/Models/Entity/Produit_Commande.cs
+/GestionCommande/Models/Entity/Produit.cs
+/GestionCommande/Models/Entity/Model1.tt
+/GestionCommande/Models/Entity/Model1.edmx.diagram
+/GestionCommande/Models/Entity/Model1.edmx
+/GestionCommande/Models/Entity/Model1.Designer.cs
+/GestionCommande/Models/Entity/Model1.cs
+/GestionCommande/Models/Entity/Model1.Context.tt
+/GestionCommande/Models/Entity/Model1.Context.cs
+/GestionCommande/Models/Entity/Livraison_commande.cs
+/GestionCommande/Models/Entity/Livraison.cs
+/GestionCommande/Models/Entity/Genre.cs
+/GestionCommande/Models/Entity/Fidelite_Client.cs
+/GestionCommande/Models/Entity/Fidelite.cs
+/GestionCommande/Models/Entity/Etat_Produit.cs
+/GestionCommande/Models/Entity/Etat.cs
+/GestionCommande/Models/Entity/Disponibilite_produit.cs
+/GestionCommande/Models/Entity/Disponibilite.cs
+/GestionCommande/Models/Entity/Commune.cs
+/GestionCommande/Models/Entity/Commandes.cs
+/GestionCommande/Models/Entity/Client.cs
