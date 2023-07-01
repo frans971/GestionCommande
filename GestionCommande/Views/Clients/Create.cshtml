@@ -16,82 +16,106 @@
 
             @using (Html.BeginForm("Create", "Clients", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <form class="needs-validation" novalidate>
-                    @Html.AntiForgeryToken()
+				<form class="needs-validation" novalidate>
+					@Html.AntiForgeryToken()
 
-                    <div class="form-group">
-                        <span style="color:red">
-                            @Html.ValidationSummary(true)
-                        </span>
-                        @if (ViewBag.success != null)
-                        {
-                            <span style="color:green">
-                                @ViewBag.success
-                            </span>
-                        }
+					<div class="form-group">
+						<span style="color:red">
+							@Html.ValidationSummary(true)
+						</span>
+						@if (ViewBag.success != null)
+						{
+							<div class="py-2 text-center">
+								<img class="d-block mx-auto mb-4" src="@Url.Content("~/Content/validation.png")" alt="" width="72" height="57">
+								<span style="color:green">
+									@ViewBag.success
+								</span>
+							</div>
 
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group select">
-                            <label class="form-label">GENRE<span style="color:red">*</span></label>
-                            <br />
-                            @Html.DropDownListFor(model => model.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
-                        </div>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label class="form-label">NOM<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.nom, new { @Class = "form-control", @required = "required" })
-                        </div>
+							<center>
+								<div class="form-row mt-3">
+									<div class="col-md-6">
+										<a class="btn btn-danger btn-lg" href="@Url.Action("Index", "Clients")">Voir la liste des clients</a>
+									</div>
+								</div>
+							</center>
+						}
 
-                        <div class="col-sm-6">
-                            <label class="form-label">PRENOM<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.prenom, new { @Class = "form-control", @required = "required" })
-                        </div>
+					</div>
+					@if (ViewBag.success == null){
+					<div class="col-sm-3">
+						<div class="form-group select">
+							<label class="form-label">GENRE<span style="color:red">*</span></label>
+							<br />
+							@Html.DropDownListFor(model => model.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
+						</div>
+					</div>
+					<div class="row g-3">
+						<div class="col-sm-6">
+							<label class="form-label">NOM<span style="color:red">*</span></label>
+							@Html.TextBoxFor(model => model.nom, new { @Class = "form-control", @required = "required" })
+						</div>
 
-                        <div class="col-sm-6">
-                            <label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
-                        </div>
+						<div class="col-sm-6">
+							<label class="form-label">PRENOM<span style="color:red">*</span></label>
+							@Html.TextBoxFor(model => model.prenom, new { @Class = "form-control", @required = "required" })
+						</div>
 
-                        <div class="col-12">
-                            <label class="form-label">EMAIL<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
-                        </div>
+						<div class="col-sm-6">
+							<label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
+							@Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
+						</div>
 
-                        <div class="col-12">
-                            <label class="form-label">Adresse<span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
-                        </div>
+						<div class="col-12">
+							<label class="form-label">EMAIL<span style="color:red">*</span></label>
+							@Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
+						</div>
 
-                        <div class="col-12">
-                            @Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
-                            @Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group select">
-                                <label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
-                                <br />
-                                @Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            @Html.Label("VILLE", new { @class = "form-label" })
-                            @Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
-                        </div>
+						<div class="col-12">
+							<label class="form-label">Adresse<span style="color:red">*</span></label>
+							@Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
+						</div>
 
-                    </div>
+						<div class="col-12">
+							@Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
+							@Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group select">
+								<label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
+								<br />
+								@Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
+							</div>
+						</div>
+						<div class="col-5">
+							@Html.Label("VILLE", new { @class = "form-label" })
+							@Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
+						</div>
 
-                    <hr class="my-4">
-                    <center>
-                        <div class="form-row mt-3">
-                            <div class="col-md-6">
-                                <a class="btn btn-danger btn-lg" href="@Url.Action("Index", "Clients")">Annuler</a>
-                                <button class="btn btn-primary btn-lg" id="buttonCreate" type="submit">Enregistrer</button>
-                            </div>
-                        </div>
-                    </center>
-                </form>
+						<hr class="hr" />
+
+						<div class="col-12">
+							<label class="form-label">Carte de fidelité</label>
+							@Html.TextBoxFor(model => model.carte_fidelite, new { @Class = "form-control", type = "number", @placeholder = "1234567988" })
+						</div>
+						<div class="col-2">
+							<label class="form-label">Points</label>
+							@Html.TextBoxFor(model => model.pt_fidelite, new { @Class = "form-control", type = "number", @Value = "50", @disabled = "disabled" })
+						</div>
+					</div>
+
+					<hr class="my-4">
+					<center>
+						<div class="form-row mt-3">
+							<div class="col-md-6">
+								<a class="btn btn-danger btn-lg" href="@Url.Action("Index", "Clients")">Annuler</a>
+								<button class="btn btn-primary btn-lg" id="buttonCreate" type="submit">Enregistrer</button>
+							</div>
+						</div>
+					</center>
+					}
+
+				</form>
             }
         </div>
     </div>

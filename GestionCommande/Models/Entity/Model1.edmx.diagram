@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3acdd7c019aa450fb83d6e0d23664306" Name="Diagram1">
+      <Diagram DiagramId="847f3a00d48144738a2982eea7593f0d" Name="Diagram1">
         <EntityTypeShape EntityType="GestionCommandeModel.Client" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.Commandes" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.Commune" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="GestionCommandeModel.Produit" Width="1.5" PointX="12.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.Produit_Commande" Width="1.5" PointX="15" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.Profil" Width="1.5" PointX="9" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionCommandeModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.TokenPasswordUser" Width="1.5" PointX="8.25" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.Type_livraison" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="GestionCommandeModel.User_Profil" Width="1.5" PointX="11.25" PointY="11.375" IsExpanded="true" />

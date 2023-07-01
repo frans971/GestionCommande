@@ -36,7 +36,7 @@ namespace GestionCommande.Models.EntityRepository
                body += "\n Votre mot de passe est le suivant : " + utilisateur.password;
             */
             var body = @"Le lien pour changer votre mot de passe est le suivant";
-            body += " https://localhost:44339/Account/ChangePassword?token="+token;
+            body += "http://51.75.126.239/GestionCommande/Account/ChangePassword?token=" + token;
 
             var client = new SmtpClient("pro1.mail.ovh.net", 587)
             {
