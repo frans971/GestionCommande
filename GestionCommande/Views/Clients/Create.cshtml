@@ -66,17 +66,17 @@
 							@Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
 						</div>
 
-						<div class="col-12">
+						<div class="col-sm-12">
 							<label class="form-label">EMAIL<span style="color:red">*</span></label>
 							@Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
 						</div>
 
-						<div class="col-12">
+						<div class="col-sm-12">
 							<label class="form-label">Adresse<span style="color:red">*</span></label>
 							@Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
 						</div>
 
-						<div class="col-12">
+						<div class="col-sm-12">
 							@Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
 							@Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
 						</div>
@@ -87,18 +87,18 @@
 								@Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
 							</div>
 						</div>
-						<div class="col-5">
+						<div class="col-sm-5">
 							@Html.Label("VILLE", new { @class = "form-label" })
 							@Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
 						</div>
 
 						<hr class="hr" />
 
-						<div class="col-12">
+						<div class="col-sm-12">
 							<label class="form-label">Carte de fidelité</label>
 							@Html.TextBoxFor(model => model.carte_fidelite, new { @Class = "form-control", type = "number", @placeholder = "1234567988" })
 						</div>
-						<div class="col-2">
+						<div class="col-sm-3">
 							<label class="form-label">Points</label>
 							@Html.TextBoxFor(model => model.pt_fidelite, new { @Class = "form-control", type = "number", @Value = "50", @disabled = "disabled" })
 						</div>

@@ -18,6 +18,8 @@ namespace GestionCommande.Controllers
         // GET: Clients
         public ActionResult Index()
         {
+            List<Client> clients = entityClient.GetAllClients();
+            ViewBag.Clients = clients;
             return View();
         }
         [HttpGet]
@@ -89,6 +91,20 @@ namespace GestionCommande.Controllers
         {
             Commune commune = entityCommune.GetCommune(codePostal);
             return commune.ville;
+        }
+
+        public ActionResult Delete (int idClient)
+        {
+            try
+            {
+                entityClient.DeleteClient(idClient);
+                return Json("ok", JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json("ok", JsonRequestBehavior.DenyGet);
+            }
+            
         }
     }
 }
