@@ -1,7 +1,62 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Gérer les clients";
 }
 
-<h2>Index</h2>
+<div class="py-2 text-center">
+	<img class="d-block mx-auto mb-4" src="@Url.Content("~/Content/BoucherieLogo.png")" alt="" width="72" height="57">
+	<h2>Gérer les clients</h2>
+</div>
 
+
+<table class="table table-bordered" id="tableClient">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th scope="col">NOM</th>
+			<th scope="col">PRENOM</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var client in ViewBag.Clients)
+		{
+			<tr>
+				<th scope="row">@client.id</th>
+				<td>@client.nom</td>
+				<td>@client.prenom</td>
+				<td>
+					<a onclick="DeleteClient('@client.id')" class="btn btn-link">Supprimer</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section scripts {
+	<script>
+		$(document).ready(function () {
+			$('#tableClient').DataTable({
+				"lengthChange": false,
+				"bInfo": false,
+				"bPaginate": false,
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/fr-FR.json',
+				}
+			});
+		});
+		function DeleteClient(response) {
+			alert(response);
+			$.ajax({
+				url: "@Url.Action("delete", "Clients")?idClient=" + response,
+				success: function (data) {
+					alert(data)
+				},
+				error: function () {
+
+				}
+			});
+		}
+	</script>
+	
+}
