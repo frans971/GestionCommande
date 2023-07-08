@@ -20,8 +20,9 @@ namespace GestionCommande.Models.Entity
             this.User_Profil = new HashSet<User_Profil>();
         }
     
-        public int id_profil { get; set; }
+        public int id { get; set; }
         public string libelle_profil { get; set; }
+        public Nullable<System.DateTime> date_crea { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Profil> User_Profil { get; set; }

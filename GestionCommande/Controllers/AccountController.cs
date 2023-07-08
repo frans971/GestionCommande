@@ -14,6 +14,7 @@ using GestionCommande.Models;
 using System.Threading.Tasks;
 using System.Web.WebPages;
 using Newtonsoft.Json.Linq;
+using GestionCommande.Models.ViewModel;
 
 namespace GestionCommande.Controllers
 {
@@ -22,33 +23,34 @@ namespace GestionCommande.Controllers
         private RequeteTokenPasswordUser entityTokenPasswordUser = new RequeteTokenPasswordUser();
         private RequeteUtilisateur entityUtilisateur = new RequeteUtilisateur();
         private RequeteCommune entityCommune = new RequeteCommune();
+        private RequeteAdresse entityAdresse= new RequeteAdresse();
         public ActionResult Index()
         {
             return View();
         }
         public ActionResult RegisterUser()
         {
-            Utilisateur utilisateur = new Utilisateur();
+            UtilisateurVM utilisateurVM = new UtilisateurVM();
             List<Commune> communes = entityCommune.GetCommunes();
             List<SelectListItem> selectListCPT = new List<SelectListItem>();
             selectListCPT.Add(new SelectListItem() { Text = "------", Value = "0" });
             foreach (var commune in communes)
             {
-                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.codePostale + "" });
+                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.id + "" });
             }
 
             List<Genre> genres = RequeteGenre.GetGenres();
             List<SelectListItem> selectListGenre = new List<SelectListItem>();
             foreach (var genre in genres)
             {
-                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id_genre });
+                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id+"" });
             }
             ViewBag.selectListGenre = selectListGenre;
             ViewBag.selectListCommune = selectListCPT;
-            return View(utilisateur);
+            return View(utilisateurVM);
         }
         [HttpPost]
-        public ActionResult RegisterUser(Utilisateur utilisateur)
+        public ActionResult RegisterUser(UtilisateurVM utilisateurVM)
         {
             ////////////////////
             List<Commune> communes = entityCommune.GetCommunes();
@@ -56,14 +58,14 @@ namespace GestionCommande.Controllers
             selectListCPT.Add(new SelectListItem() { Text = "------", Value = "0" });
             foreach (var commune in communes)
             {
-                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.codePostale + "" });
+                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.id + "" });
             }
 
             List<Genre> genres = RequeteGenre.GetGenres();
             List<SelectListItem> selectListGenre = new List<SelectListItem>();
             foreach (var genre in genres)
             {
-                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id_genre });
+                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id+"" });
             }
             ViewBag.selectListGenre = selectListGenre;
             ViewBag.selectListCommune = selectListCPT;
@@ -72,67 +74,69 @@ namespace GestionCommande.Controllers
             {
                 ////////////////////////
                 //on vérifie que le le pseudo ne comporte pas d' @ ni de .com
-                if (utilisateur.identifiant.Contains("@") && utilisateur.identifiant.Contains(".com") || utilisateur.identifiant.Length < 5)
+                if (utilisateurVM.Utilisateur.identifiant.Contains("@") && utilisateurVM.Utilisateur.identifiant.Contains(".com") || utilisateurVM.Utilisateur.identifiant.Length < 5)
                 {
                     this.ModelState.AddModelError(string.Empty, "Le pseudo n'est pas valide ou trop petit");
-                    utilisateur.password = null;
-                    return View(utilisateur);
+                    utilisateurVM.Utilisateur.password = null;
+                    return View(utilisateurVM);
                 }
                 //on verifie que l'adresse mail et le pseudo sont bien unique 
-                if (entityUtilisateur.CheckUniqueValue(utilisateur.mail) == true)
+                if (entityUtilisateur.CheckUniqueValue(utilisateurVM.Utilisateur.mail) == true)
                 {
                     this.ModelState.AddModelError(string.Empty, "Cette adresse mail est déjà utilisée");
-                    utilisateur.password = null;
-                    return View(utilisateur);
+                    utilisateurVM.Utilisateur.password = null;
+                    return View(utilisateurVM);
                 }
-                if (entityUtilisateur.CheckUniqueValue(utilisateur.identifiant) == true)
+                if (entityUtilisateur.CheckUniqueValue(utilisateurVM.Utilisateur.identifiant) == true)
                 {
                     this.ModelState.AddModelError(string.Empty, "Le pseudo est déjà utilisée");
-                    utilisateur.password = null;
-                    return View(utilisateur);
+                    utilisateurVM.Utilisateur.password = null;
+                    return View(utilisateurVM);
                 }
-                if (utilisateur.num_tel.ToString().Length < 9)
+                if (utilisateurVM.Utilisateur.num_tel.ToString().Length < 9)
                 {
                     this.ModelState.AddModelError(string.Empty, "Le numéro de téléphone n'est pas valide");
-                    utilisateur.password = null;
-                    return View(utilisateur);
+                    utilisateurVM.Utilisateur.password = null;
+                    return View(utilisateurVM);
                 }
-                if (utilisateur.password.Length < 8)
+                if (utilisateurVM.Utilisateur.password.Length < 8)
                 {
                     this.ModelState.AddModelError(string.Empty, "Le mot de passe est trop court");
-                    utilisateur.password = null;
-                    return View(utilisateur);
+                    utilisateurVM.Utilisateur.password = null;
+                    return View(utilisateurVM);
                 }
             }
             catch
             {
                 this.ModelState.AddModelError(string.Empty, "Une erreur s'est produite : impossible d'ajouter créer le compte");
-                utilisateur.password = null;
-                return View(utilisateur);
+                utilisateurVM.Utilisateur.password = null;
+                return View(utilisateurVM);
             }
-            
+
 
             //on met en majuscule le nom, le prenom et l'adresse de l'utilisateur
-            utilisateur.nom = utilisateur.nom.ToUpper();
-            utilisateur.prenom= utilisateur.prenom.ToUpper();
-            utilisateur.adresse= utilisateur.adresse.ToUpper();
-            utilisateur.date_crea = DateTime.Now.Date;
-            utilisateur.etat = 1;
-            utilisateur.password= GethashPassword(utilisateur.password);
+            utilisateurVM.Utilisateur.nom = utilisateurVM.Utilisateur.nom.ToUpper();
+            utilisateurVM.Utilisateur.prenom= utilisateurVM.Utilisateur.prenom.ToUpper();
+            utilisateurVM.Utilisateur.date_crea = DateTime.Now.Date;
+            utilisateurVM.Utilisateur.id_etat = 1;
+            utilisateurVM.Utilisateur.password= GethashPassword(utilisateurVM.Utilisateur.password);
+           
             try
             {
-                entityUtilisateur.AddUserRegister(utilisateur);
-                string message = "Bienvenue " + utilisateur.nom + " " + utilisateur.prenom + " sur GestionCommande";
+                utilisateurVM.Adresse.id_utilisateur = entityUtilisateur.AddUserRegister(utilisateurVM.Utilisateur);
+                utilisateurVM.Adresse.id_commune = utilisateurVM.Adresse.Commune.id;
+                entityAdresse.AddAdresse(utilisateurVM.Adresse);
+                string message = "Bienvenue " + utilisateurVM.Utilisateur.nom + " " + utilisateurVM.Utilisateur.prenom + " sur GestionCommande";
                 //Task.Run(() => SendMail.SendMailRegisterUser(utilisateur, message));
-                utilisateur = new Utilisateur();
+                utilisateurVM.Utilisateur = new Utilisateur();
                 ViewBag.success = "Votre compte a été créé avec succès.";
-                return View(utilisateur);
+                return View(utilisateurVM);
             }
             catch
             {
                 this.ModelState.AddModelError(string.Empty, "Une erreur s'est produite : impossible d'ajouter créer le compte");
-                utilisateur.password = null;
-                return View(utilisateur);
+                utilisateurVM.Utilisateur.password = null;
+                return View(utilisateurVM);
             }
            
         }
@@ -155,7 +159,7 @@ namespace GestionCommande.Controllers
                 return this.View(account);
             }
             Utilisateur utilisateur = new Utilisateur();
-            if(account.Identifiant.Contains("@") && account.Identifiant.Contains(".com"))
+            if (account.Identifiant.Contains("@") && account.Identifiant.Contains(".com"))
             {
                 utilisateur.mail = account.Identifiant;
             }
@@ -163,7 +167,7 @@ namespace GestionCommande.Controllers
             {
                 utilisateur.identifiant = account.Identifiant;
             }
-           
+
 
             //on hash le mot de passe 
             utilisateur.password = account.Password;
@@ -245,16 +249,13 @@ namespace GestionCommande.Controllers
             }
 
         }
-        public ActionResult ForgetPasswordUtilisateur(string email)
+
+        public JsonResult ForgetPasswordUtilisateur(string email)
         {
             //on verifie que le mail est valide 
             if(!email.Contains("@") && !email.Contains(".com"))
             {
-                return new JsonResult()
-                {
-                    Data = new { errMsg = "L'adresse mail n'est pas valide" },
-                    JsonRequestBehavior = JsonRequestBehavior.DenyGet
-                };
+                return Json("L'adresse mail n'est pas valide", JsonRequestBehavior.DenyGet);
             }
             //on vérifie que le mail existe en base de donnée 
             if(entityUtilisateur.CheckMailutilisateur(email))
@@ -282,19 +283,11 @@ namespace GestionCommande.Controllers
 
 
                 // on retourne un message 
-                return new JsonResult()
-                {
-                    Data = new { successMsg = "Un courriel de réinitialisation vous à été envoyé" },
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                };
+                return  Json("Un lien de réinitialisation à été envoyé par email" ,JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return new JsonResult()
-                {
-                    Data = new { errMsg = "L'adresse mail n'est pas valide" },
-                    JsonRequestBehavior = JsonRequestBehavior.DenyGet
-                };
+                return Json("L'adresse mail n'est pas valide", JsonRequestBehavior.DenyGet);
             }
         }
 
@@ -342,9 +335,9 @@ namespace GestionCommande.Controllers
             }
         }
 
-        public string GetCommune(string codePostal)
+        public string GetCommune(int idCommune)
         {
-            Commune commune = entityCommune.GetCommune(codePostal);
+            Commune commune = entityCommune.GetCommune(idCommune);
             return commune.ville ;
         }
     }

@@ -12,14 +12,15 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Disponibilite_produit
+    public partial class Adresse
     {
         public int id { get; set; }
-        public int id_disponibilite { get; set; }
-        public int id_produit { get; set; }
-        public System.DateTime date_crea { get; set; }
+        public string adresse_libelle { get; set; }
+        public string complement_adresse { get; set; }
+        public int id_commune { get; set; }
+        public int id_utilisateur { get; set; }
     
-        public virtual Disponibilite Disponibilite { get; set; }
-        public virtual Produit Produit { get; set; }
+        public virtual Commune Commune { get; set; }
+        public virtual Utilisateur Utilisateur { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace GestionCommande.Models.Entity
         public int id_user_profil { get; set; }
         public int id_profil { get; set; }
         public int id_utilisateur { get; set; }
+        public System.DateTime date_crea { get; set; }
     
         public virtual Profil Profil { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }

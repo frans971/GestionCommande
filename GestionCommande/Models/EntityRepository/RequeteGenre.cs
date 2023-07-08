@@ -11,7 +11,7 @@ namespace GestionCommande.Models.EntityRepository
         private static GestionCommandeEntities db = new GestionCommandeEntities();
         public static List<Genre> GetGenres()
         {
-            return db.Genre.OrderByDescending(g=> g.id_genre).ToList();  
+            return db.Genre.OrderByDescending(g=> g.id).ToList();  
         }
     }
 }

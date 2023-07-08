@@ -24,10 +24,14 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public Nullable<System.DateTime> date_commande { get; set; }
         public Nullable<System.DateTime> date_livraison { get; set; }
-        public string etat_commande { get; set; }
+        public int id_etat { get; set; }
         public int id_client { get; set; }
-        public Nullable<decimal> montant { get; set; }
+        public double montant { get; set; }
+        public Nullable<int> id_auteur { get; set; }
     
+        public virtual Client Client { get; set; }
+        public virtual Etat Etat { get; set; }
+        public virtual Utilisateur Utilisateur { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Livraison_commande> Livraison_commande { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

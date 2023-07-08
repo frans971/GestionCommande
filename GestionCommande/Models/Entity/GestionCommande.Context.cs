@@ -25,11 +25,13 @@ namespace GestionCommande.Models.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Adresse> Adresse { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Commandes> Commandes { get; set; }
         public virtual DbSet<Commune> Commune { get; set; }
         public virtual DbSet<Disponibilite> Disponibilite { get; set; }
         public virtual DbSet<Disponibilite_produit> Disponibilite_produit { get; set; }
+        public virtual DbSet<Employe> Employe { get; set; }
         public virtual DbSet<Etat> Etat { get; set; }
         public virtual DbSet<Etat_Produit> Etat_Produit { get; set; }
         public virtual DbSet<Fidelite> Fidelite { get; set; }
@@ -40,6 +42,7 @@ namespace GestionCommande.Models.Entity
         public virtual DbSet<Produit> Produit { get; set; }
         public virtual DbSet<Produit_Commande> Produit_Commande { get; set; }
         public virtual DbSet<Profil> Profil { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TokenPasswordUser> TokenPasswordUser { get; set; }
         public virtual DbSet<Type_livraison> Type_livraison { get; set; }
         public virtual DbSet<User_Profil> User_Profil { get; set; }

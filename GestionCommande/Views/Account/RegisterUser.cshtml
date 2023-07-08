@@ -1,4 +1,4 @@
-﻿@model GestionCommande.Models.Entity.Utilisateur
+﻿@model GestionCommande.Models.ViewModel.UtilisateurVM
 @{
     ViewBag.Title = "Création";
 }
@@ -17,6 +17,9 @@
             {
                 <form class="needs-validation" novalidate>
                     @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model => model.Adresse.Commune.ville)
+                    @Html.HiddenFor(model => model.Adresse.Commune.codePostale)
 
                     <div class="form-group">
                         <span style="color:red">
@@ -52,58 +55,58 @@
                             <div class="form-group select">
                                 <label class="form-label">GENRE<span style="color:red">*</span></label>
                                 <br />
-                                @Html.DropDownListFor(model => model.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
+                                @Html.DropDownListFor(model => model.Utilisateur.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label class="form-label">NOM<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.nom, new { @Class = "form-control", @required = "required" })
+                                @Html.TextBoxFor(model => model.Utilisateur.nom, new { @Class = "form-control", @required = "required" })
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">PRENOM<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.prenom, new { @Class = "form-control", @required = "required" })
+                                @Html.TextBoxFor(model => model.Utilisateur.prenom, new { @Class = "form-control", @required = "required" })
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label">PSEUDO<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.identifiant, new { @Class = "form-control", @required = "required", @placeholder = "Ex :" })
+                                @Html.TextBoxFor(model => model.Utilisateur.identifiant, new { @Class = "form-control", @required = "required", @placeholder = "Ex :" })
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
+                                @Html.TextBoxFor(model => model.Utilisateur.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">EMAIL<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
+                                @Html.TextBoxFor(model => model.Utilisateur.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Adresse<span style="color:red">*</span></label>
-                                @Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
+                                @Html.TextBoxFor(model => model.Adresse.adresse_libelle, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
                             </div>
 
                             <div class="col-12">
                                 @Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
+                                @Html.TextBoxFor(model => model.Adresse.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group select">
                                     <label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
                                     <br />
-                                    @Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
+                                    @Html.DropDownListFor(model => model.Adresse.Commune.id, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
                                 </div>
                             </div>
                             <div class="col-5">
                                 @Html.Label("VILLE", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
+                                @Html.TextBoxFor(model => model.Adresse.Commune.ville, new { id="libelle_ville", @Class = "form-control", @disabled = "disabled" })
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="inputPassword">Mot de passe<span style="color:red">*</span></label>
-                                @Html.PasswordFor(m => m.password, new { @class = "form-control input", onchange = "CheckConfirmPassword()" })
+                                @Html.PasswordFor(m => m.Utilisateur.password, new { @class = "form-control input", onchange = "CheckConfirmPassword()" })
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputConfirmPassword">Confirmation de mot de passe<span style="color:red">*</span></label>
@@ -115,9 +118,9 @@
                         <div class="mx-auto" style="width: 200px;">
                             <button class="btn btn-primary btn-lg disabled" id="buttonCreate" type="submit">Enregistrer</button>
                         </div>
-                     }
+                    }
                 </form>
-             }
+            }
         </div>
     </div>
 </div>
@@ -130,33 +133,46 @@
             $("#cpt").select2({
                 theme: "bootstrap-5"
             });
-            $("#id_genre").select2({
+            $("#Utilisateur_id_genre").select2({
                 theme: "bootstrap-5"
             });
 
-
-             $("#cpt").change(function () {
-                 if (($(this).val()) == "0") {
-                     document.getElementById("Commune_ville").value = "";
-                 }
-                 else {
-                     $.ajax({
-                         url: "@Url.Action("GetCommune", "Account")?codePostal=" + $(this).val(),
-                        success: function (data) {
-                            document.getElementById("Commune_ville").value = data;
-                    },
+            if ($("#cpt").val() != "0") {
+                  $.ajax({
+                      url: "@Url.Action("GetCommune", "Account")?idCommune=" + $("#cpt").val(),
+                         success: function (data) {
+                             document.getElementById("Adresse_Commune_ville").value = data;
+                        },
                         error: function () {
-                            document.getElementById("Commune_ville").value = "Indisponible";
-                    }
-                });
-                 }
+                            document.getElementById("Adresse_Commune_ville").value = "Indisponible";
+                        }
+                    });
+            }
 
-             })
         });
 
+        $("#cpt").change(function () {
+            if (($(this).val()) == "0") {
+                document.getElementById("Commune_ville").value = "";
+            }
+            else {
+                $.ajax({
+                    url: "@Url.Action("GetCommune", "Account")?idCommune=" + $(this).val(),
+                    success: function (data) {
+                        document.getElementById("Adresse_Commune_ville").value = data;
+                        document.getElementById("libelle_ville").value = data;
+                        document.getElementById("Adresse_Commune_codePostale").value = $("#select2-cpt-container").attr('title');
+                    },
+                    error: function () {
+                        document.getElementById("Adresse_Commune_ville").value = "Indisponible";
+                    }
+                });
+            }
+
+        })
         function CheckConfirmPassword() {
-           
-            var password = $('#password').val();
+
+            var password = $('#Utilisateur_password').val();
             var confirmPassword = $('#inputConfirmPassword').val();
             if (password.trim().length < 9) {
                 $('#buttonCreate').addClass('disabled');
