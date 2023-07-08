@@ -12,28 +12,25 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Etat
+    public partial class Employe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Etat()
+        public Employe()
         {
-            this.Commandes = new HashSet<Commandes>();
-            this.Utilisateur = new HashSet<Utilisateur>();
-            this.Etat_Produit = new HashSet<Etat_Produit>();
-            this.Produit = new HashSet<Produit>();
+            this.Fidelite = new HashSet<Fidelite>();
+            this.Fidelite1 = new HashSet<Fidelite>();
         }
     
         public int id { get; set; }
-        public string libelle { get; set; }
+        public int id_utilisateur { get; set; }
         public System.DateTime date_crea { get; set; }
+        public int created_by { get; set; }
     
+        public virtual Utilisateur Utilisateur { get; set; }
+        public virtual Utilisateur Utilisateur1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commandes> Commandes { get; set; }
+        public virtual ICollection<Fidelite> Fidelite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Utilisateur> Utilisateur { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Etat_Produit> Etat_Produit { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Produit> Produit { get; set; }
+        public virtual ICollection<Fidelite> Fidelite1 { get; set; }
     }
 }

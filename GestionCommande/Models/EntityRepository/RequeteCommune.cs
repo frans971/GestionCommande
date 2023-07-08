@@ -14,9 +14,9 @@ namespace GestionCommande.Models.EntityRepository
         {
             return db.Commune.ToList();
         }
-        public Commune GetCommune(string codePostal)
+        public Commune GetCommune(int id)
         {
-            return db.Commune.Where(c => c.codePostale == codePostal).FirstOrDefault();
+            return db.Commune.Where(c => c.id == id).FirstOrDefault();
         }
     }
 }

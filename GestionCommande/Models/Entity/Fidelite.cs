@@ -31,8 +31,8 @@ namespace GestionCommande.Models.Entity
         public Nullable<int> point_fidelite_bonus { get; set; }
         public Nullable<int> remise_achat_pourcentage { get; set; }
         public Nullable<int> remise_achat_euro { get; set; }
-        public Nullable<decimal> prix_min { get; set; }
-        public Nullable<decimal> prix_max { get; set; }
+        public Nullable<double> prix_min { get; set; }
+        public Nullable<double> prix_max { get; set; }
         public Nullable<int> age_min { get; set; }
         public Nullable<int> age_max { get; set; }
         public int created_by { get; set; }
@@ -41,9 +41,9 @@ namespace GestionCommande.Models.Entity
         public string specification { get; set; }
         public string commentaire { get; set; }
     
+        public virtual Employe Employe { get; set; }
+        public virtual Employe Employe1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fidelite_Client> Fidelite_Client { get; set; }
-        public virtual Utilisateur Utilisateur { get; set; }
-        public virtual Utilisateur Utilisateur1 { get; set; }
     }
 }

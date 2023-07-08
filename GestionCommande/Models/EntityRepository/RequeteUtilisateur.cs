@@ -12,17 +12,22 @@ namespace GestionCommande.Models.EntityRepository
     {
         private static GestionCommandeEntities db = new GestionCommandeEntities();
     
-        public void AddUserRegister(Utilisateur utilisateur)
+        public int AddUserRegister(Utilisateur utilisateur)
         {
             db.Utilisateur.Add(utilisateur);
             db.SaveChanges();
+            return utilisateur.id;
         }
 
         public string GetGeneratePassword(int length)
         {
            return  Membership.GeneratePassword(length, 1);
         }
-
+        
+        public List<Utilisateur> GetUtilisateurs()
+        {
+            return db.Utilisateur.ToList();
+        }
 
         public void ModifyUtilisateur(Utilisateur utilisateur)
         {
@@ -66,10 +71,7 @@ namespace GestionCommande.Models.EntityRepository
             }
         }
 
-        public Utilisateur GetUtilisateurByPseudo(string pseudo)
-        {
-            return db.Utilisateur.Where(u => u.identifiant == pseudo).FirstOrDefault();
-        }
+
         public bool CheckMailutilisateur(string email)
         {
             Utilisateur utilisateur = db.Utilisateur.Where(u => u.mail == email).FirstOrDefault();

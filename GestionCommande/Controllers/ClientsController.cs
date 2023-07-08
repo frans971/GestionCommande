@@ -30,14 +30,14 @@ namespace GestionCommande.Controllers
             selectListCPT.Add(new SelectListItem() { Text = "------", Value = "0" });
             foreach (var commune in communes)
             {
-                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.codePostale + "" });
+                selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.id + "" });
             }
 
             List<Genre> genres = RequeteGenre.GetGenres();
             List<SelectListItem> selectListGenre = new List<SelectListItem>();
             foreach (var genre in genres)
             {
-                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id_genre });
+                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id+"" });
             }
             ViewBag.selectListGenre = selectListGenre;
             ViewBag.selectListCommune = selectListCPT;
@@ -54,14 +54,14 @@ namespace GestionCommande.Controllers
                 selectListCPT.Add(new SelectListItem() { Text = "------", Value = "0" });
                 foreach (var commune in communes)
                 {
-                    selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.codePostale + "" });
+                    selectListCPT.Add(new SelectListItem() { Text = commune.codePostale + "", Value = commune.id + "" });
                 }
 
                 List<Genre> genres = RequeteGenre.GetGenres();
                 List<SelectListItem> selectListGenre = new List<SelectListItem>();
                 foreach (var genre in genres)
                 {
-                    selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id_genre });
+                    selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id+"" });
                 }
                 ViewBag.selectListGenre = selectListGenre;
                 ViewBag.selectListCommune = selectListCPT;
@@ -87,9 +87,9 @@ namespace GestionCommande.Controllers
             return View();
         }
 
-        public string GetCommune(string codePostal)
+        public string GetCommune(int idCommune)
         {
-            Commune commune = entityCommune.GetCommune(codePostal);
+            Commune commune = entityCommune.GetCommune(idCommune);
             return commune.ville;
         }
 

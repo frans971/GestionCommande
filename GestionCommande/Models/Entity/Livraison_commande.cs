@@ -17,6 +17,7 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public int id_livraison { get; set; }
         public int id_commande { get; set; }
+        public int id_adresse { get; set; }
     
         public virtual Commandes Commandes { get; set; }
         public virtual Livraison Livraison { get; set; }

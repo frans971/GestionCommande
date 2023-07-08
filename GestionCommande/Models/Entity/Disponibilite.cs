@@ -24,6 +24,7 @@ namespace GestionCommande.Models.Entity
         public Nullable<System.DateTime> date_disponibilite_deb { get; set; }
         public Nullable<System.DateTime> date_dispinbilite_fin { get; set; }
         public bool isPermanant { get; set; }
+        public System.DateTime date_crea { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disponibilite_produit> Disponibilite_produit { get; set; }

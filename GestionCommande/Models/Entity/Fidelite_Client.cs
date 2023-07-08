@@ -17,6 +17,7 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public int id_client { get; set; }
         public int id_fidelite { get; set; }
+        public System.DateTime date_crea { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Fidelite Fidelite { get; set; }

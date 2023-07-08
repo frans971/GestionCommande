@@ -17,25 +17,22 @@ namespace GestionCommande.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
+            this.Commandes = new HashSet<Commandes>();
             this.Fidelite_Client = new HashSet<Fidelite_Client>();
         }
     
         public int id { get; set; }
-        public string id_genre { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string num_tel { get; set; }
-        public string mail { get; set; }
-        public string adresse { get; set; }
-        public string complement_adresse { get; set; }
-        public string cpt { get; set; }
-        public Nullable<System.DateTime> date_crea { get; set; }
+        public int id_utilisateur { get; set; }
+        public System.DateTime date_crea { get; set; }
         public Nullable<System.DateTime> date_modif { get; set; }
         public Nullable<int> carte_fidelite { get; set; }
         public Nullable<int> pt_fidelite { get; set; }
+        public int created_by { get; set; }
     
-        public virtual Genre Genre { get; set; }
-        public virtual Commune Commune { get; set; }
+        public virtual Utilisateur Utilisateur { get; set; }
+        public virtual Utilisateur Utilisateur1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Commandes> Commandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fidelite_Client> Fidelite_Client { get; set; }
     }
