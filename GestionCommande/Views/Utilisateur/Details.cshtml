@@ -1,7 +1,113 @@
-﻿
+﻿@model GestionCommande.Models.ViewModel.UtilisateurVM
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
+<div class="py-2 text-center ">
+    <img class="d-block mx-auto mb-4" src="@Url.Content("~/Content/BoucherieLogo.png")" alt="" width="72" height="57">
+    <h2>INSCRIPTION</h2>
+</div>
+
+<div class="container">
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-7 col-lg-8">
+            @if (ViewBag.Exception != null)
+            {
+                <p class="text-center fs-3" style="color:darkslateblue">@ViewBag.Exception</p>
+            }
+            @if (ViewBag.Exception == null)
+            {
+                <form class="needs-validation" novalidate>
+
+                    <div class="form-group">
+                        <span style="color:red">
+                            @Html.ValidationSummary(true)
+                        </span>
+
+                        <div class="alert alert-danger d-none" id="errorMessageLenght" role="alert">
+                            Le mot de passe saisie est trop court
+                        </div>
+                        <div class="alert alert-danger d-none" id="errorMessage" role="alert">
+                            Le mot de passe et sa confirmation ne sont pas égaux
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group select">
+                            <label class="form-label">GENRE<span style="color:red">*</span></label>
+                            <br />
+                            @Html.TextBoxFor(model => model.Utilisateur.Genre.libelle_genre, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">NOM<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Utilisateur.nom, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">PRENOM<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Utilisateur.prenom, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label">PSEUDO<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Utilisateur.identifiant, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Utilisateur.num_tel, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="form-label">EMAIL<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Utilisateur.mail, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="form-label">Adresse<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model => model.Adresse.adresse_libelle, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <div class="col-sm-12">
+                            @Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Adresse.complement_adresse, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group select">
+                                <label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
+                                <br />
+                                @Html.TextBoxFor(model => model.Adresse.Commune.codePostale, new { @Class = "form-control", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            @Html.Label("VILLE", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Adresse.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="col-sm-4">
+                            @Html.Label("Nombre de commande :", new { @class = "form-label" })
+                            <input class="form-control" value="@ViewBag.NbCommande" disabled />
+                        </div>
+                        <hr class="my-4">
+                        <center>
+                            <div class="form-row mt-3">
+                                <div class="col-md-7">
+                                    <a href="@Url.Action("Login","Account")" class="btn btn-danger rounded">Retour</a>
+                                    <button onclick="sendMailForgetPassword()" class="btn btn-primary rounded">Envoyer</button>
+
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </form>
+            }
+
+        </div>
+    </div>
+</div>
 

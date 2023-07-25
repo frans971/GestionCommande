@@ -1,5 +1,6 @@
 ﻿using GestionCommande.Models.Entity;
 using GestionCommande.Models.EntityRepository;
+using GestionCommande.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.EntityClient;
@@ -14,7 +15,8 @@ namespace GestionCommande.Controllers
     {
         private RequeteCommune entityCommune = new RequeteCommune();
         private RequeteClient entityClient = new RequeteClient();
-
+        private RequeteUtilisateur entityUtilisateur = new RequeteUtilisateur();
+        private RequeteAdresse entityAdresse = new RequeteAdresse();
         // GET: Clients
         public ActionResult Index()
         {
@@ -45,7 +47,7 @@ namespace GestionCommande.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Client client)
+        public ActionResult Create(ClientVM clientVM)
         {
             try
             {
@@ -67,14 +69,20 @@ namespace GestionCommande.Controllers
                 ViewBag.selectListCommune = selectListCPT;
 
                 //On ajoute au client 50 points de fidelité si la carte de fidelité n'est pas null
-                if (client.carte_fidelite != null)
+                if (clientVM.Client.carte_fidelite != null)
                 {
-                    client.pt_fidelite = 50;
+                    clientVM.Client.pt_fidelite = 50;
                 }
-                client.date_crea = DateTime.Now;
+                clientVM.Client.date_crea = DateTime.Now;
+                clientVM.Client.created_by = entityUtilisateur.GetUtilisateurConnecte().id;
+
+                // on ajoute en premier lieu l'adresse du client dans la table adresse 
+                clientVM.Adresse.id_utilisateur = clientVM.Client.created_by;
+                clientVM.Adresse.id_commune = clientVM.Adresse.Commune.id;
+                entityAdresse.AddAdresse(clientVM.Adresse);
 
                 //on ajoute le client en base 
-                entityClient.AddClient(client);
+                entityClient.AddClient(clientVM.Client);
                 ViewBag.success = "Le compte client a été créé avec succès.";
 
 

@@ -30,6 +30,11 @@ namespace GestionCommande.Controllers
         }
         public ActionResult RegisterUser()
         {
+            if (User.Identity.Name != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+          
             UtilisateurVM utilisateurVM = new UtilisateurVM();
             List<Commune> communes = entityCommune.GetCommunes();
             List<SelectListItem> selectListCPT = new List<SelectListItem>();
@@ -43,11 +48,13 @@ namespace GestionCommande.Controllers
             List<SelectListItem> selectListGenre = new List<SelectListItem>();
             foreach (var genre in genres)
             {
-                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id+"" });
+                selectListGenre.Add(new SelectListItem() { Text = genre.libelle_genre, Value = genre.id + "" });
             }
             ViewBag.selectListGenre = selectListGenre;
             ViewBag.selectListCommune = selectListCPT;
+            
             return View(utilisateurVM);
+
         }
         [HttpPost]
         public ActionResult RegisterUser(UtilisateurVM utilisateurVM)
@@ -117,7 +124,7 @@ namespace GestionCommande.Controllers
             //on met en majuscule le nom, le prenom et l'adresse de l'utilisateur
             utilisateurVM.Utilisateur.nom = utilisateurVM.Utilisateur.nom.ToUpper();
             utilisateurVM.Utilisateur.prenom= utilisateurVM.Utilisateur.prenom.ToUpper();
-            utilisateurVM.Utilisateur.date_crea = DateTime.Now.Date;
+            utilisateurVM.Utilisateur.date_crea = DateTime.Now;
             utilisateurVM.Utilisateur.id_etat = 1;
             utilisateurVM.Utilisateur.password= GethashPassword(utilisateurVM.Utilisateur.password);
            

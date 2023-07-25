@@ -26,6 +26,11 @@ namespace GestionCommande.Models.EntityRepository
         {
             return db.Client.Where(c => c.id == id).FirstOrDefault();
         }
+
+        public Client GetClientByIdUtilisateur(int idUtilisateur)
+        {
+            return db.Client.Where(c => c.id_utilisateur == idUtilisateur).FirstOrDefault();
+        }
         public List<Client> GetAllClients () { 
             return db.Client.ToList();  
         }

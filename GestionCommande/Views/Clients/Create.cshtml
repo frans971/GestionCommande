@@ -1,4 +1,4 @@
-﻿@model GestionCommande.Models.Entity.Client
+﻿@model GestionCommande.Models.ViewModel.ClientVM
 @{
     ViewBag.Title = "Nouveau client";
 }
@@ -43,64 +43,65 @@
 
 					</div>
 					@if (ViewBag.success == null){
+						@Html.HiddenFor(model=> model.Adresse.Commune.ville)
 					<div class="col-sm-3">
 						<div class="form-group select">
 							<label class="form-label">GENRE<span style="color:red">*</span></label>
 							<br />
-							@Html.DropDownListFor(model => model.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
+							@Html.DropDownListFor(model => model.Client.Utilisateur.id_genre, (IEnumerable<SelectListItem>)ViewBag.selectListGenre, new { @Class = "form-control", @required = "required" })
 						</div>
 					</div>
 					<div class="row g-3">
 						<div class="col-sm-6">
 							<label class="form-label">NOM<span style="color:red">*</span></label>
-							@Html.TextBoxFor(model => model.nom, new { @Class = "form-control", @required = "required" })
+							@Html.TextBoxFor(model => model.Client.Utilisateur.nom, new { @Class = "form-control", @required = "required" })
 						</div>
 
 						<div class="col-sm-6">
 							<label class="form-label">PRENOM<span style="color:red">*</span></label>
-							@Html.TextBoxFor(model => model.prenom, new { @Class = "form-control", @required = "required" })
+							@Html.TextBoxFor(model => model.Client.Utilisateur.prenom, new { @Class = "form-control", @required = "required" })
 						</div>
 
 						<div class="col-sm-6">
 							<label class="form-label">N° TELEPHONE<span style="color:red">*</span></label>
-							@Html.TextBoxFor(model => model.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
+							@Html.TextBoxFor(model => model.Client.Utilisateur.num_tel, new { @Class = "form-control", @required = "required", type = "number", onKeyPress = "if(this.value.length==10) return false;", @placeholder = "Ex : 06 90 12 34 56" })
 						</div>
 
 						<div class="col-sm-12">
 							<label class="form-label">EMAIL<span style="color:red">*</span></label>
-							@Html.TextBoxFor(model => model.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
+							@Html.TextBoxFor(model => model.Client.Utilisateur.mail, new { @Class = "form-control", @required = "required", @placeholder = "Ex : you@example.com" })
 						</div>
 
 						<div class="col-sm-12">
 							<label class="form-label">Adresse<span style="color:red">*</span></label>
-							@Html.TextBoxFor(model => model.adresse, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
+							@Html.TextBoxFor(model => model.Adresse.adresse_libelle, new { @Class = "form-control", @required = "required", @placeholder = "Ex : 1234 Boulevard de chemin" })
 						</div>
 
 						<div class="col-sm-12">
 							@Html.Label("COMPLEMENT D'ADRESSE", new { @class = "form-label" })
-							@Html.TextBoxFor(model => model.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
+							@Html.TextBoxFor(model => model.Adresse.complement_adresse, new { @Class = "form-control", @placeholder = "Ex : Appartement 2" })
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group select">
 								<label class="form-label">CODE POSTAL<span style="color:red">*</span></label>
 								<br />
-								@Html.DropDownListFor(model => model.cpt, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
+								@Html.DropDownListFor(model => model.Adresse.Commune.codePostale, (IEnumerable<SelectListItem>)ViewBag.selectListCommune, new { @Class = "form-control", id = "cpt", @required = "required" })
 							</div>
 						</div>
 						<div class="col-sm-5">
 							@Html.Label("VILLE", new { @class = "form-label" })
-							@Html.TextBoxFor(model => model.Commune.ville, new { @Class = "form-control", @disabled = "disabled" })
+							@Html.TextBoxFor(model => model.Adresse.Commune.ville, new { @Class = "form-control", @disabled = "disabled", id="ville" })
 						</div>
 
 						<hr class="hr" />
 
 						<div class="col-sm-12">
 							<label class="form-label">Carte de fidelité</label>
-							@Html.TextBoxFor(model => model.carte_fidelite, new { @Class = "form-control", type = "number", @placeholder = "1234567988" })
+							@Html.TextBoxFor(model => model.Client.carte_fidelite, new { @Class = "form-control", type = "number", @placeholder = "1234567988" })
 						</div>
 						<div class="col-sm-3">
 							<label class="form-label">Points</label>
-							@Html.TextBoxFor(model => model.pt_fidelite, new { @Class = "form-control", type = "number", @Value = "50", @disabled = "disabled" })
+							@Html.TextBoxFor(model => model.Client.pt_fidelite, new { @Class = "form-control", type = "number", @Value = "50", @disabled = "disabled" })
 						</div>
 					</div>
 
@@ -128,23 +129,27 @@
             $("#cpt").select2({
                 theme: "bootstrap-5"
             });
-            $("#id_genre").select2({
+            $("#Client_Utilisateur_id_genre").select2({
                 theme: "bootstrap-5"
             });
 
 
-             $("#cpt").change(function () {
+            $("#cpt").change(function () {
                  if (($(this).val()) == "0") {
-                     document.getElementById("Commune_ville").value = "";
+					 document.getElementById("Adresse_Commune_ville").value = "";
+                     document.getElementById("ville").value = "";
                  }
                  else {
                      $.ajax({
-                         url: "@Url.Action("GetCommune", "Clients")?codePostal=" + $(this).val(),
+                         url: "@Url.Action("GetCommune", "Clients")?idCommune=" + $(this).val(),
                         success: function (data) {
-                            document.getElementById("Commune_ville").value = data;
+							document.getElementById("Adresse_Commune_ville").value = data;
+                            document.getElementById("ville").value = data;
                     },
                         error: function () {
-                            document.getElementById("Commune_ville").value = "Indisponible";
+							document.getElementById("Adresse_Commune_ville").value = "Indisponible";
+                            document.getElementById("ville").value = "Indisponible";
+
                     }
                 });
                  }

@@ -15,6 +15,7 @@ namespace GestionCommande.Models.EntityRepository
         {
             try
             {
+                adresse.Commune = null;
                 db.Adresse.Add(adresse);
                 db.SaveChanges();
             }
@@ -38,7 +39,7 @@ namespace GestionCommande.Models.EntityRepository
         {
             try
             {
-                return db.Adresse.Where(a => a.id == id).FirstOrDefault();
+                return db.Adresse.Where(a => a.id_utilisateur == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
