@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GestionCommandeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GestionCommandeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adresse">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="adresse_libelle" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="complement_adresse" Type="varchar" MaxLength="150" />
           <Property Name="id_commune" Type="int" Nullable="false" />
@@ -225,13 +225,13 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_genre" Type="int" Nullable="false" />
-          <Property Name="identifiant" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="identifiant" Type="varchar" MaxLength="30" />
           <Property Name="nom" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="prenom" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="date_naissance" Type="date" />
           <Property Name="num_tel" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="mail" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="128" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
           <Property Name="date_modif" Type="datetime" />
           <Property Name="id_etat" Type="int" Nullable="false" />
@@ -708,8 +708,7 @@
             <End Role="Utilisateur" EntitySet="Utilisateur" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GestionCommandeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -979,13 +978,13 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_genre" Type="Int32" Nullable="false" />
-          <Property Name="identifiant" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="identifiant" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_naissance" Type="DateTime" Precision="0" />
           <Property Name="num_tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_modif" Type="DateTime" Precision="3" />
           <Property Name="id_etat" Type="Int32" Nullable="false" />

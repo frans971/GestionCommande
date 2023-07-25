@@ -43,9 +43,6 @@ namespace GestionCommande.Models.Entity
         public System.DateTime date_crea { get; set; }
         public Nullable<System.DateTime> date_modif { get; set; }
         public int id_etat { get; set; }
-
-
-
         public int GetCountCommandeUtilisateur()
         {
             int nbCommande = 0;
@@ -67,7 +64,6 @@ namespace GestionCommande.Models.Entity
             nbCommande += GetCountCommandeUtilisateur();
             return nbCommande;
         }
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Adresse> Adresse { get; set; }

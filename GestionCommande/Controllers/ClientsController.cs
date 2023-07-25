@@ -75,13 +75,19 @@ namespace GestionCommande.Controllers
                 }
                 clientVM.Client.date_crea = DateTime.Now;
                 clientVM.Client.created_by = entityUtilisateur.GetUtilisateurConnecte().id;
+                //on ajoute le client dans la table utilisateur
+                clientVM.Client.Utilisateur.id_etat = 1;
+                clientVM.Client.Utilisateur.date_crea = DateTime.Now;
+                entityUtilisateur.AddUserRegister(clientVM.Client.Utilisateur);
 
                 // on ajoute en premier lieu l'adresse du client dans la table adresse 
-                clientVM.Adresse.id_utilisateur = clientVM.Client.created_by;
-                clientVM.Adresse.id_commune = clientVM.Adresse.Commune.id;
+                clientVM.Adresse.id_utilisateur = clientVM.Client.Utilisateur.id;
+                clientVM.Adresse.id_commune = int.Parse(clientVM.Adresse.Commune.codePostale);
                 entityAdresse.AddAdresse(clientVM.Adresse);
 
-                //on ajoute le client en base 
+                // on ajoute ensuite le client dans la table client
+                clientVM.Client.id_utilisateur = clientVM.Client.Utilisateur.id;
+                clientVM.Client.Utilisateur = null;
                 entityClient.AddClient(clientVM.Client);
                 ViewBag.success = "Le compte client a été créé avec succès.";
 
@@ -91,8 +97,9 @@ namespace GestionCommande.Controllers
                 this.ModelState.AddModelError(string.Empty, "Une erreur s'est produite : impossible d'ajouter créer le compte client");
                 return View();
             }
-            
+
             return View();
+
         }
 
         public string GetCommune(int idCommune)
