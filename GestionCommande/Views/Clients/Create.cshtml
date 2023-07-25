@@ -43,7 +43,6 @@
 
 					</div>
 					@if (ViewBag.success == null){
-						@Html.HiddenFor(model=> model.Adresse.Commune.ville)
 					<div class="col-sm-3">
 						<div class="form-group select">
 							<label class="form-label">GENRE<span style="color:red">*</span></label>
@@ -90,7 +89,7 @@
 						</div>
 						<div class="col-sm-5">
 							@Html.Label("VILLE", new { @class = "form-label" })
-							@Html.TextBoxFor(model => model.Adresse.Commune.ville, new { @Class = "form-control", @disabled = "disabled", id="ville" })
+							@Html.TextBoxFor(model => model.Adresse.Commune.ville, new { @Class = "form-control", @disabled = "disabled", })
 						</div>
 
 						<hr class="hr" />
@@ -144,11 +143,9 @@
                          url: "@Url.Action("GetCommune", "Clients")?idCommune=" + $(this).val(),
                         success: function (data) {
 							document.getElementById("Adresse_Commune_ville").value = data;
-                            document.getElementById("ville").value = data;
                     },
                         error: function () {
 							document.getElementById("Adresse_Commune_ville").value = "Indisponible";
-                            document.getElementById("ville").value = "Indisponible";
 
                     }
                 });
