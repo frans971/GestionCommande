@@ -81,7 +81,7 @@
 										@User.Identity.Name.ToUpper()
 									</a>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="@Url.Action("Details", "Utilisateur")">Mon compte</a></li>
+										<li><a class="dropdown-item" href="@Url.Action("Details", "Utilisateur")?identifiant=@User.Identity.Name">Mon compte</a></li>
 										<li><a class="dropdown-item" href="#">Mon espace</a></li>
 										<li><a class="dropdown-item" href="@Url.Action("LogOff", "Account")">Se déconnecter</a></li>
 									</ul>
@@ -196,7 +196,7 @@
 		<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
 			© @DateTime.Now.Year Copyright:
 			<a class="text-reset fw-bold" href="">
-				Boucherie-Galante 23.07.05.1
+				Boucherie-Galante 23.07.25.1
 			</a>
 		</div>
 		<!-- Copyright -->

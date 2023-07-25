@@ -11,7 +11,9 @@ namespace GestionCommande.Models.EntityRepository
     public class RequeteUtilisateur
     {
         private static GestionCommandeEntities db = new GestionCommandeEntities();
-    
+
+        public object Context { get; private set; }
+
         public int AddUserRegister(Utilisateur utilisateur)
         {
             db.Utilisateur.Add(utilisateur);
@@ -23,10 +25,23 @@ namespace GestionCommande.Models.EntityRepository
         {
            return  Membership.GeneratePassword(length, 1);
         }
-        
+
+        public Utilisateur GetUtilisateurConnecte()
+        {
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            return db.Utilisateur.Where(user => user.identifiant == userName).FirstOrDefault();
+        }
+
+
         public List<Utilisateur> GetUtilisateurs()
         {
             return db.Utilisateur.ToList();
+        }
+
+        public Utilisateur GetUtilisateurByIdentifiant(string identifiant)
+        {
+            return db.Utilisateur.Where(u=> u.identifiant == identifiant).FirstOrDefault();
         }
 
         public void ModifyUtilisateur(Utilisateur utilisateur)

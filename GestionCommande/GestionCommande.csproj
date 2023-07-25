@@ -282,6 +282,7 @@
     <Compile Include="Models\Entity\Utilisateur.cs">
       <DependentUpon>GestionCommande.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\ClientVM.cs" />
     <Compile Include="Models\ViewModel\UtilisateurVM.cs" />
     <Compile Include="Services\Mail\SendMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
