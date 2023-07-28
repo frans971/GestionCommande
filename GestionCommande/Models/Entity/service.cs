@@ -12,15 +12,22 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Produit_Commande
+    public partial class service
     {
-        public int id { get; set; }
-        public Nullable<int> id_commande { get; set; }
-        public int id_produit { get; set; }
-        public System.DateTime date_crea { get; set; }
-        public double prix { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public service()
+        {
+            this.employee = new HashSet<employee>();
+        }
     
-        public virtual Commandes Commandes { get; set; }
-        public virtual Produit Produit { get; set; }
+        public int id { get; set; }
+        public string libelle { get; set; }
+        public string commentaire { get; set; }
+        public System.DateTime date_crea { get; set; }
+        public int created_by { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<employee> employee { get; set; }
+        public virtual Utilisateur Utilisateur { get; set; }
     }
 }

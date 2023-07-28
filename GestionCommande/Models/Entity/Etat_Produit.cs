@@ -17,6 +17,8 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public int id_etat { get; set; }
         public int id_produit { get; set; }
+        public System.DateTime date_crea { get; set; }
+        public int created_by { get; set; }
     
         public virtual Etat Etat { get; set; }
         public virtual Produit Produit { get; set; }

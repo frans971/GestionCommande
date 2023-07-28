@@ -202,85 +202,91 @@
     <Compile Include="Models\EntityRepository\RequeteTokenPasswordUser.cs" />
     <Compile Include="Models\EntityRepository\RequeteUtilisateur.cs" />
     <Compile Include="Models\Entity\Adresse.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Client.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Commandes.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Commune.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Disponibilite.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Disponibilite_produit.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\Employe.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+    <Compile Include="Models\Entity\employee.cs">
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Etat.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Etat_Produit.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Fidelite.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\Fidelite_Client.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Genre.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\GestionCommande.Context.cs">
+    <Compile Include="Models\Entity\GestionCommandeEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GestionCommande.Context.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\GestionCommande.cs">
+    <Compile Include="Models\Entity\GestionCommandeEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\GestionCommande.Designer.cs">
+    <Compile Include="Models\Entity\GestionCommandeEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GestionCommande.edmx</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Implantation.cs">
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Livraison.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Livraison_commande.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Produit.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Produit_Commande.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Profil.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\Region.cs">
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\service.cs">
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\sysdiagrams.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\TokenPasswordUser.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Type_livraison.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\User_Profil.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Utilisateur.cs">
-      <DependentUpon>GestionCommande.tt</DependentUpon>
+      <DependentUpon>GestionCommandeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\ClientVM.cs" />
     <Compile Include="Models\ViewModel\UtilisateurVM.cs" />
@@ -309,15 +315,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Entity\GestionCommande.Context.tt">
+    <Content Include="Models\Entity\GestionCommandeEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GestionCommande.edmx</DependentUpon>
-      <LastGenOutput>GestionCommande.Context.cs</LastGenOutput>
+      <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
+      <LastGenOutput>GestionCommandeEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Entity\GestionCommande.tt">
+    <Content Include="Models\Entity\GestionCommandeEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GestionCommande.edmx</DependentUpon>
-      <LastGenOutput>GestionCommande.cs</LastGenOutput>
+      <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
+      <LastGenOutput>GestionCommandeEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\BDD\GestionCommande.sql" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -348,12 +354,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\Entity\GestionCommande.edmx">
+    <EntityDeploy Include="Models\Entity\GestionCommandeEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GestionCommande.Designer.cs</LastGenOutput>
+      <LastGenOutput>GestionCommandeEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Entity\GestionCommande.edmx.diagram">
-      <DependentUpon>GestionCommande.edmx</DependentUpon>
+    <Content Include="Models\Entity\GestionCommandeEntities.edmx.diagram">
+      <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

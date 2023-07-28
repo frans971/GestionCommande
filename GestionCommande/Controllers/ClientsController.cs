@@ -117,7 +117,7 @@ namespace GestionCommande.Controllers
             }
             catch(Exception ex)
             {
-                return Json("ok", JsonRequestBehavior.DenyGet);
+                return Json("ko", JsonRequestBehavior.DenyGet);
             }
             
         }

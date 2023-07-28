@@ -12,14 +12,19 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Fidelite_Client
+    public partial class Region
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Region()
+        {
+            this.Commune = new HashSet<Commune>();
+        }
+    
         public int id { get; set; }
-        public int id_client { get; set; }
-        public int id_fidelite { get; set; }
+        public string libelle { get; set; }
         public System.DateTime date_crea { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual Fidelite Fidelite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Commune> Commune { get; set; }
     }
 }

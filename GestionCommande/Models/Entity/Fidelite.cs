@@ -14,12 +14,6 @@ namespace GestionCommande.Models.Entity
     
     public partial class Fidelite
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fidelite()
-        {
-            this.Fidelite_Client = new HashSet<Fidelite_Client>();
-        }
-    
         public int id { get; set; }
         public string nom { get; set; }
         public string evenement { get; set; }
@@ -41,9 +35,7 @@ namespace GestionCommande.Models.Entity
         public string specification { get; set; }
         public string commentaire { get; set; }
     
-        public virtual Employe Employe { get; set; }
-        public virtual Employe Employe1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fidelite_Client> Fidelite_Client { get; set; }
+        public virtual employee employee { get; set; }
+        public virtual employee employee1 { get; set; }
     }
 }

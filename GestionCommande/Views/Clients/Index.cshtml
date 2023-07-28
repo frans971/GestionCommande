@@ -52,8 +52,9 @@
 			$.ajax({
 				url: "@Url.Action("delete", "Clients")?idClient=" + response,
 				success: function (data) {
-					alert(data)
-					// si data == ok alors on rafraichi la page
+                    if (data == "ok") {
+						window.location.href = '/clients/index'
+					}
 				},
 				error: function () {
 

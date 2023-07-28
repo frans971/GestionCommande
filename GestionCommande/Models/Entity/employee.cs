@@ -12,23 +12,28 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Adresse
+    public partial class employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Adresse()
+        public employee()
         {
-            this.Implantation = new HashSet<Implantation>();
+            this.Fidelite = new HashSet<Fidelite>();
+            this.Fidelite1 = new HashSet<Fidelite>();
         }
     
         public int id { get; set; }
-        public string adresse_libelle { get; set; }
-        public string complement_adresse { get; set; }
-        public int id_commune { get; set; }
         public int id_utilisateur { get; set; }
+        public int id_responsable { get; set; }
+        public int id_service { get; set; }
+        public System.DateTime date_crea { get; set; }
+        public int created_by { get; set; }
     
-        public virtual Commune Commune { get; set; }
+        public virtual service service { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
+        public virtual Utilisateur Utilisateur1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Implantation> Implantation { get; set; }
+        public virtual ICollection<Fidelite> Fidelite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fidelite> Fidelite1 { get; set; }
     }
 }
