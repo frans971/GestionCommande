@@ -14,6 +14,7 @@ namespace GestionCommande.Models.Entity
     using System.Collections.Generic;
     using System.Linq;
 
+
     public partial class Utilisateur
     {
         private RequeteCommande entityCommande = new RequeteCommande();

@@ -30,7 +30,7 @@ namespace GestionCommande.Controllers
         }
         public ActionResult RegisterUser()
         {
-            if (User.Identity.Name != null)
+            if (User.Identity.Name != null && !User.Identity.Name.IsEmpty())
             {
                 return RedirectToAction("Index", "Home");
             }
