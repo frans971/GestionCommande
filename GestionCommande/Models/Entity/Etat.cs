@@ -26,7 +26,6 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public string libelle { get; set; }
         public System.DateTime date_crea { get; set; }
-        public int created_by { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commandes> Commandes { get; set; }

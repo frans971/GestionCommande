@@ -18,7 +18,6 @@ namespace GestionCommande.Models.Entity
         public Nullable<int> id_commande { get; set; }
         public int id_produit { get; set; }
         public System.DateTime date_crea { get; set; }
-        public double prix { get; set; }
     
         public virtual Commandes Commandes { get; set; }
         public virtual Produit Produit { get; set; }

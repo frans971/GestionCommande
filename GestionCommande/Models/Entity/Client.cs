@@ -18,6 +18,7 @@ namespace GestionCommande.Models.Entity
         public Client()
         {
             this.Commandes = new HashSet<Commandes>();
+            this.Fidelite_Client = new HashSet<Fidelite_Client>();
         }
     
         public int id { get; set; }
@@ -32,5 +33,7 @@ namespace GestionCommande.Models.Entity
         public virtual Utilisateur Utilisateur1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commandes> Commandes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fidelite_Client> Fidelite_Client { get; set; }
     }
 }

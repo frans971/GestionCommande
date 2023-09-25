@@ -14,12 +14,6 @@ namespace GestionCommande.Models.Entity
     
     public partial class Adresse
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Adresse()
-        {
-            this.Implantation = new HashSet<Implantation>();
-        }
-    
         public int id { get; set; }
         public string adresse_libelle { get; set; }
         public string complement_adresse { get; set; }
@@ -28,7 +22,5 @@ namespace GestionCommande.Models.Entity
     
         public virtual Commune Commune { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Implantation> Implantation { get; set; }
     }
 }

@@ -23,11 +23,8 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
         public string codePostale { get; set; }
         public string ville { get; set; }
-        public int id_region { get; set; }
-        public System.DateTime date_crea { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Adresse> Adresse { get; set; }
-        public virtual Region Region { get; set; }
     }
 }

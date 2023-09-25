@@ -24,7 +24,7 @@ namespace GestionCommande.Models.Entity
     
         public int id { get; set; }
         public string libelle_produit { get; set; }
-        public Nullable<double> prix_unitaire { get; set; }
+        public Nullable<decimal> prix { get; set; }
         public Nullable<int> reduction_pourcentage { get; set; }
         public Nullable<decimal> reduction_euro { get; set; }
         public string description { get; set; }

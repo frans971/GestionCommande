@@ -46,8 +46,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codePostale" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="ville" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="id_region" Type="int" Nullable="false" />
-          <Property Name="date_crea" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Disponibilite">
           <Key>
@@ -68,14 +66,12 @@
           <Property Name="id_produit" Type="int" Nullable="false" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="employee">
+        <EntityType Name="Employe">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_utilisateur" Type="int" Nullable="false" />
-          <Property Name="id_responsable" Type="int" Nullable="false" />
-          <Property Name="id_service" Type="int" Nullable="false" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
           <Property Name="created_by" Type="int" Nullable="false" />
         </EntityType>
@@ -86,7 +82,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="libelle" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
-          <Property Name="created_by" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Etat_Produit">
           <Key>
@@ -95,8 +90,6 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="id_etat" Type="int" Nullable="false" />
           <Property Name="id_produit" Type="int" Nullable="false" />
-          <Property Name="date_crea" Type="datetime" Nullable="false" />
-          <Property Name="created_by" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Fidelite">
           <Key>
@@ -123,6 +116,15 @@
           <Property Name="specification" Type="varchar(max)" />
           <Property Name="commentaire" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Fidelite_Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_fidelite" Type="int" Nullable="false" />
+          <Property Name="date_crea" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Genre">
           <Key>
             <PropertyRef Name="id" />
@@ -130,16 +132,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="libelle_genre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Implantation">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nom" Type="varchar(max)" Nullable="false" />
-          <Property Name="adresse_id" Type="int" Nullable="false" />
-          <Property Name="date_crea" Type="datetime" Nullable="false" />
-          <Property Name="created_by" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Livraison">
           <Key>
@@ -165,7 +157,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="libelle_produit" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="prix_unitaire" Type="float" />
+          <Property Name="prix" Type="numeric" Precision="5" Scale="2" />
           <Property Name="reduction_pourcentage" Type="int" />
           <Property Name="reduction_euro" Type="numeric" Precision="5" Scale="0" />
           <Property Name="description" Type="varchar" MaxLength="150" />
@@ -181,7 +173,6 @@
           <Property Name="id_commande" Type="int" />
           <Property Name="id_produit" Type="int" Nullable="false" />
           <Property Name="date_crea" Type="datetime" Nullable="false" />
-          <Property Name="prix" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Profil">
           <Key>
@@ -190,24 +181,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="libelle_profil" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="date_crea" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Region">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="date_crea" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="service">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="libelle" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="commentaire" Type="varchar(max)" />
-          <Property Name="date_crea" Type="datetime" Nullable="false" />
-          <Property Name="created_by" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -395,18 +368,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Commune_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="1" />
-          <End Role="Commune" Type="Self.Commune" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Commune">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Disponibilite_produit_Disponibilite">
           <End Role="Disponibilite" Type="Self.Disponibilite" Multiplicity="1" />
           <End Role="Disponibilite_produit" Type="Self.Disponibilite_produit" Multiplicity="*" />
@@ -431,39 +392,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_employee_service">
-          <End Role="service" Type="Self.service" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="service">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="id_service" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Fk_employee_utilisateur_created_by">
+        <Association Name="FK_Employe_Utilisateur">
           <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Utilisateur">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="employee">
+            <Dependent Role="Employe">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Utilisateur_Created_by">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employe">
               <PropertyRef Name="created_by" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employee_utilisateur_id_responsable">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="id_responsable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,11 +440,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Fidelite_employee">
-          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+        <Association Name="FK_Fidelite_Client_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Fidelite_Client" Type="Self.Fidelite_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fidelite_Client">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fidelite_Client_Fidelite">
+          <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="1" />
+          <End Role="Fidelite_Client" Type="Self.Fidelite_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fidelite">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fidelite_Client">
+              <PropertyRef Name="id_fidelite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fidelite_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
           <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="employee">
+            <Principal Role="Employe">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Fidelite">
@@ -503,39 +476,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Fidelite_employee1">
-          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+        <Association Name="FK_Fidelite_Employe1">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="0..1" />
           <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="employee">
+            <Principal Role="Employe">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Fidelite">
               <PropertyRef Name="modif_by" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Implantation_adresse">
-          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
-          <End Role="Implantation" Type="Self.Implantation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Adresse">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Implantation">
-              <PropertyRef Name="adresse_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Implantation_utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="Implantation" Type="Self.Implantation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Implantation">
-              <PropertyRef Name="created_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -599,18 +548,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_service_utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="service" Type="Self.service" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="service">
-              <PropertyRef Name="created_by" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_Profil_Profil">
           <End Role="Profil" Type="Self.Profil" Multiplicity="1" />
           <End Role="User_Profil" Type="Self.User_Profil" Multiplicity="*" />
@@ -642,19 +579,17 @@
           <EntitySet Name="Commune" EntityType="Self.Commune" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disponibilite" EntityType="Self.Disponibilite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disponibilite_produit" EntityType="Self.Disponibilite_produit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Etat" EntityType="Self.Etat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Etat_Produit" EntityType="Self.Etat_Produit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fidelite" EntityType="Self.Fidelite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fidelite_Client" EntityType="Self.Fidelite_Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Implantation" EntityType="Self.Implantation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Livraison" EntityType="Self.Livraison" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Livraison_commande" EntityType="Self.Livraison_commande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produit_Commande" EntityType="Self.Produit_Commande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profil" EntityType="Self.Profil" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TokenPasswordUser" EntityType="Self.TokenPasswordUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_livraison" EntityType="Self.Type_livraison" Schema="dbo" store:Type="Tables" />
@@ -704,10 +639,6 @@
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="Commandes" EntitySet="Commandes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Commune_Region" Association="Self.FK_Commune_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Commune" EntitySet="Commune" />
-          </AssociationSet>
           <AssociationSet Name="FK_Disponibilite_produit_Disponibilite" Association="Self.FK_Disponibilite_produit_Disponibilite">
             <End Role="Disponibilite" EntitySet="Disponibilite" />
             <End Role="Disponibilite_produit" EntitySet="Disponibilite_produit" />
@@ -716,17 +647,13 @@
             <End Role="Produit" EntitySet="Produit" />
             <End Role="Disponibilite_produit" EntitySet="Disponibilite_produit" />
           </AssociationSet>
-          <AssociationSet Name="FK_employee_service" Association="Self.FK_employee_service">
-            <End Role="service" EntitySet="service" />
-            <End Role="employee" EntitySet="employee" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_employee_utilisateur_created_by" Association="Self.Fk_employee_utilisateur_created_by">
+          <AssociationSet Name="FK_Employe_Utilisateur" Association="Self.FK_Employe_Utilisateur">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="employee" EntitySet="employee" />
+            <End Role="Employe" EntitySet="Employe" />
           </AssociationSet>
-          <AssociationSet Name="FK_employee_utilisateur_id_responsable" Association="Self.FK_employee_utilisateur_id_responsable">
+          <AssociationSet Name="FK_Employe_Utilisateur_Created_by" Association="Self.FK_Employe_Utilisateur_Created_by">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="employee" EntitySet="employee" />
+            <End Role="Employe" EntitySet="Employe" />
           </AssociationSet>
           <AssociationSet Name="FK_Etat_Produit_Etat" Association="Self.FK_Etat_Produit_Etat">
             <End Role="Etat" EntitySet="Etat" />
@@ -736,21 +663,21 @@
             <End Role="Produit" EntitySet="Produit" />
             <End Role="Etat_Produit" EntitySet="Etat_Produit" />
           </AssociationSet>
-          <AssociationSet Name="FK_Fidelite_employee" Association="Self.FK_Fidelite_employee">
-            <End Role="employee" EntitySet="employee" />
+          <AssociationSet Name="FK_Fidelite_Client_Client" Association="Self.FK_Fidelite_Client_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Fidelite_Client" EntitySet="Fidelite_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fidelite_Client_Fidelite" Association="Self.FK_Fidelite_Client_Fidelite">
+            <End Role="Fidelite" EntitySet="Fidelite" />
+            <End Role="Fidelite_Client" EntitySet="Fidelite_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fidelite_Employe" Association="Self.FK_Fidelite_Employe">
+            <End Role="Employe" EntitySet="Employe" />
             <End Role="Fidelite" EntitySet="Fidelite" />
           </AssociationSet>
-          <AssociationSet Name="FK_Fidelite_employee1" Association="Self.FK_Fidelite_employee1">
-            <End Role="employee" EntitySet="employee" />
+          <AssociationSet Name="FK_Fidelite_Employe1" Association="Self.FK_Fidelite_Employe1">
+            <End Role="Employe" EntitySet="Employe" />
             <End Role="Fidelite" EntitySet="Fidelite" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Implantation_adresse" Association="Self.FK_Implantation_adresse">
-            <End Role="Adresse" EntitySet="Adresse" />
-            <End Role="Implantation" EntitySet="Implantation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Implantation_utilisateur" Association="Self.FK_Implantation_utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Implantation" EntitySet="Implantation" />
           </AssociationSet>
           <AssociationSet Name="FK_Livraison_commande_Commandes" Association="Self.FK_Livraison_commande_Commandes">
             <End Role="Commandes" EntitySet="Commandes" />
@@ -771,10 +698,6 @@
           <AssociationSet Name="FK_Produit_Etat" Association="Self.FK_Produit_Etat">
             <End Role="Etat" EntitySet="Etat" />
             <End Role="Produit" EntitySet="Produit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_service_utilisateur" Association="Self.FK_service_utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="service" EntitySet="service" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Profil_Profil" Association="Self.FK_User_Profil_Profil">
             <End Role="Profil" EntitySet="Profil" />
@@ -801,7 +724,6 @@
           <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Commune" Relationship="Self.FK_Adresse_Commune" FromRole="Adresse" ToRole="Commune" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Adresse_Utilisateur" FromRole="Adresse" ToRole="Utilisateur" />
-          <NavigationProperty Name="Implantation" Relationship="Self.FK_Implantation_adresse" FromRole="Adresse" ToRole="Implantation" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -817,6 +739,7 @@
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Client_Utilisateur" FromRole="Client" ToRole="Utilisateur" />
           <NavigationProperty Name="Utilisateur1" Relationship="Self.FK_Client_Utilisateur_Created_by" FromRole="Client" ToRole="Utilisateur" />
           <NavigationProperty Name="Commandes" Relationship="Self.FK_Commandes_Client" FromRole="Client" ToRole="Commandes" />
+          <NavigationProperty Name="Fidelite_Client" Relationship="Self.FK_Fidelite_Client_Client" FromRole="Client" ToRole="Fidelite_Client" />
         </EntityType>
         <EntityType Name="Commandes">
           <Key>
@@ -842,10 +765,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codePostale" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ville" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_region" Type="Int32" Nullable="false" />
-          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Adresse" Relationship="Self.FK_Adresse_Commune" FromRole="Commune" ToRole="Adresse" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Commune_Region" FromRole="Commune" ToRole="Region" />
         </EntityType>
         <EntityType Name="Disponibilite">
           <Key>
@@ -869,21 +789,18 @@
           <NavigationProperty Name="Disponibilite" Relationship="Self.FK_Disponibilite_produit_Disponibilite" FromRole="Disponibilite_produit" ToRole="Disponibilite" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_Disponibilite_produit_Produit" FromRole="Disponibilite_produit" ToRole="Produit" />
         </EntityType>
-        <EntityType Name="employee">
+        <EntityType Name="Employe">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
-          <Property Name="id_responsable" Type="Int32" Nullable="false" />
-          <Property Name="id_service" Type="Int32" Nullable="false" />
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="created_by" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="service" Relationship="Self.FK_employee_service" FromRole="employee" ToRole="service" />
-          <NavigationProperty Name="Utilisateur" Relationship="Self.Fk_employee_utilisateur_created_by" FromRole="employee" ToRole="Utilisateur" />
-          <NavigationProperty Name="Utilisateur1" Relationship="Self.FK_employee_utilisateur_id_responsable" FromRole="employee" ToRole="Utilisateur" />
-          <NavigationProperty Name="Fidelite" Relationship="Self.FK_Fidelite_employee" FromRole="employee" ToRole="Fidelite" />
-          <NavigationProperty Name="Fidelite1" Relationship="Self.FK_Fidelite_employee1" FromRole="employee" ToRole="Fidelite" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Employe_Utilisateur" FromRole="Employe" ToRole="Utilisateur" />
+          <NavigationProperty Name="Utilisateur1" Relationship="Self.FK_Employe_Utilisateur_Created_by" FromRole="Employe" ToRole="Utilisateur" />
+          <NavigationProperty Name="Fidelite" Relationship="Self.FK_Fidelite_Employe" FromRole="Employe" ToRole="Fidelite" />
+          <NavigationProperty Name="Fidelite1" Relationship="Self.FK_Fidelite_Employe1" FromRole="Employe" ToRole="Fidelite" />
         </EntityType>
         <EntityType Name="Etat">
           <Key>
@@ -892,7 +809,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="libelle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="created_by" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Commandes" Relationship="Self.FK_Commandes_Etat" FromRole="Etat" ToRole="Commandes" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Utilisateu__etat" FromRole="Etat" ToRole="Utilisateur" />
           <NavigationProperty Name="Etat_Produit" Relationship="Self.FK_Etat_Produit_Etat" FromRole="Etat" ToRole="Etat_Produit" />
@@ -905,8 +821,6 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="id_etat" Type="Int32" Nullable="false" />
           <Property Name="id_produit" Type="Int32" Nullable="false" />
-          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="created_by" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Etat" Relationship="Self.FK_Etat_Produit_Etat" FromRole="Etat_Produit" ToRole="Etat" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_Etat_Produit_Produit" FromRole="Etat_Produit" ToRole="Produit" />
         </EntityType>
@@ -934,8 +848,20 @@
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="specification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="employee" Relationship="Self.FK_Fidelite_employee" FromRole="Fidelite" ToRole="employee" />
-          <NavigationProperty Name="employee1" Relationship="Self.FK_Fidelite_employee1" FromRole="Fidelite" ToRole="employee" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Fidelite_Employe" FromRole="Fidelite" ToRole="Employe" />
+          <NavigationProperty Name="Employe1" Relationship="Self.FK_Fidelite_Employe1" FromRole="Fidelite" ToRole="Employe" />
+          <NavigationProperty Name="Fidelite_Client" Relationship="Self.FK_Fidelite_Client_Fidelite" FromRole="Fidelite" ToRole="Fidelite_Client" />
+        </EntityType>
+        <EntityType Name="Fidelite_Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_fidelite" Type="Int32" Nullable="false" />
+          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Fidelite_Client_Client" FromRole="Fidelite_Client" ToRole="Client" />
+          <NavigationProperty Name="Fidelite" Relationship="Self.FK_Fidelite_Client_Fidelite" FromRole="Fidelite_Client" ToRole="Fidelite" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -945,18 +871,6 @@
           <Property Name="libelle_genre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Utilisateur_Genre" FromRole="Genre" ToRole="Utilisateur" />
-        </EntityType>
-        <EntityType Name="Implantation">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="adresse_id" Type="Int32" Nullable="false" />
-          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="created_by" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Adresse" Relationship="Self.FK_Implantation_adresse" FromRole="Implantation" ToRole="Adresse" />
-          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Implantation_utilisateur" FromRole="Implantation" ToRole="Utilisateur" />
         </EntityType>
         <EntityType Name="Livraison">
           <Key>
@@ -986,7 +900,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="libelle_produit" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prix_unitaire" Type="Double" />
+          <Property Name="prix" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="reduction_pourcentage" Type="Int32" />
           <Property Name="reduction_euro" Type="Decimal" Precision="5" Scale="0" />
           <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -1006,7 +920,6 @@
           <Property Name="id_commande" Type="Int32" />
           <Property Name="id_produit" Type="Int32" Nullable="false" />
           <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="prix" Type="Double" Nullable="false" />
           <NavigationProperty Name="Commandes" Relationship="Self.FK_Produit_Commande_Commandes" FromRole="Produit_Commande" ToRole="Commandes" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_Commande_Produit" FromRole="Produit_Commande" ToRole="Produit" />
         </EntityType>
@@ -1018,27 +931,6 @@
           <Property Name="libelle_profil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_crea" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User_Profil" Relationship="Self.FK_User_Profil_Profil" FromRole="Profil" ToRole="User_Profil" />
-        </EntityType>
-        <EntityType Name="Region">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Commune" Relationship="Self.FK_Commune_Region" FromRole="Region" ToRole="Commune" />
-        </EntityType>
-        <EntityType Name="service">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="libelle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="date_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="created_by" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="employee" Relationship="Self.FK_employee_service" FromRole="service" ToRole="employee" />
-          <NavigationProperty Name="Utilisateur" Relationship="Self.FK_service_utilisateur" FromRole="service" ToRole="Utilisateur" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1101,12 +993,10 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Utilisateur" FromRole="Utilisateur" ToRole="Client" />
           <NavigationProperty Name="Client1" Relationship="Self.FK_Client_Utilisateur_Created_by" FromRole="Utilisateur" ToRole="Client" />
           <NavigationProperty Name="Commandes" Relationship="Self.FK_Commandes_Utilisateur" FromRole="Utilisateur" ToRole="Commandes" />
-          <NavigationProperty Name="employee" Relationship="Self.Fk_employee_utilisateur_created_by" FromRole="Utilisateur" ToRole="employee" />
-          <NavigationProperty Name="employee1" Relationship="Self.FK_employee_utilisateur_id_responsable" FromRole="Utilisateur" ToRole="employee" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Employe_Utilisateur" FromRole="Utilisateur" ToRole="Employe" />
+          <NavigationProperty Name="Employe1" Relationship="Self.FK_Employe_Utilisateur_Created_by" FromRole="Utilisateur" ToRole="Employe" />
           <NavigationProperty Name="Etat" Relationship="Self.FK__Utilisateu__etat" FromRole="Utilisateur" ToRole="Etat" />
           <NavigationProperty Name="Genre" Relationship="Self.FK_Utilisateur_Genre" FromRole="Utilisateur" ToRole="Genre" />
-          <NavigationProperty Name="Implantation" Relationship="Self.FK_Implantation_utilisateur" FromRole="Utilisateur" ToRole="Implantation" />
-          <NavigationProperty Name="service" Relationship="Self.FK_service_utilisateur" FromRole="Utilisateur" ToRole="service" />
           <NavigationProperty Name="TokenPasswordUser" Relationship="Self.FK__TokenPass_Utilisateur" FromRole="Utilisateur" ToRole="TokenPasswordUser" />
           <NavigationProperty Name="User_Profil" Relationship="Self.FK__User_Profil_Utilisateur" FromRole="Utilisateur" ToRole="User_Profil" />
         </EntityType>
@@ -1131,18 +1021,6 @@
             </Principal>
             <Dependent Role="Adresse">
               <PropertyRef Name="id_utilisateur" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Implantation_adresse">
-          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
-          <End Role="Implantation" Type="Self.Implantation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Adresse">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Implantation">
-              <PropertyRef Name="adresse_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1178,6 +1056,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Commandes">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fidelite_Client_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Fidelite_Client" Type="Self.Fidelite_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fidelite_Client">
               <PropertyRef Name="id_client" />
             </Dependent>
           </ReferentialConstraint>
@@ -1230,18 +1120,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Commune_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="1" />
-          <End Role="Commune" Type="Self.Commune" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Commune">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Disponibilite_produit_Disponibilite">
           <End Role="Disponibilite" Type="Self.Disponibilite" Multiplicity="1" />
           <End Role="Disponibilite_produit" Type="Self.Disponibilite_produit" Multiplicity="*" />
@@ -1266,47 +1144,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_employee_service">
-          <End Role="service" Type="Self.service" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="service">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="id_service" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Fk_employee_utilisateur_created_by">
+        <Association Name="FK_Employe_Utilisateur">
           <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Utilisateur">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="employee">
+            <Dependent Role="Employe">
+              <PropertyRef Name="id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Utilisateur_Created_by">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employe">
               <PropertyRef Name="created_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_employee_utilisateur_id_responsable">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="id_responsable" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Fidelite_employee">
-          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+        <Association Name="FK_Fidelite_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
           <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="employee">
+            <Principal Role="Employe">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Fidelite">
@@ -1314,11 +1180,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Fidelite_employee1">
-          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+        <Association Name="FK_Fidelite_Employe1">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="0..1" />
           <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="employee">
+            <Principal Role="Employe">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Fidelite">
@@ -1374,6 +1240,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fidelite_Client_Fidelite">
+          <End Role="Fidelite" Type="Self.Fidelite" Multiplicity="1" />
+          <End Role="Fidelite_Client" Type="Self.Fidelite_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fidelite">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fidelite_Client">
+              <PropertyRef Name="id_fidelite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Utilisateur_Genre">
           <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
           <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
@@ -1383,18 +1261,6 @@
             </Principal>
             <Dependent Role="Utilisateur">
               <PropertyRef Name="id_genre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Implantation_utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="Implantation" Type="Self.Implantation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Implantation">
-              <PropertyRef Name="created_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1446,18 +1312,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_service_utilisateur">
-          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
-          <End Role="service" Type="Self.service" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="service">
-              <PropertyRef Name="created_by" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TokenPass_Utilisateur">
           <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="1" />
           <End Role="TokenPasswordUser" Type="Self.TokenPasswordUser" Multiplicity="*" />
@@ -1489,19 +1343,17 @@
           <EntitySet Name="Commune" EntityType="Self.Commune" />
           <EntitySet Name="Disponibilite" EntityType="Self.Disponibilite" />
           <EntitySet Name="Disponibilite_produit" EntityType="Self.Disponibilite_produit" />
-          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" />
           <EntitySet Name="Etat" EntityType="Self.Etat" />
           <EntitySet Name="Etat_Produit" EntityType="Self.Etat_Produit" />
           <EntitySet Name="Fidelite" EntityType="Self.Fidelite" />
+          <EntitySet Name="Fidelite_Client" EntityType="Self.Fidelite_Client" />
           <EntitySet Name="Genre" EntityType="Self.Genre" />
-          <EntitySet Name="Implantation" EntityType="Self.Implantation" />
           <EntitySet Name="Livraison" EntityType="Self.Livraison" />
           <EntitySet Name="Livraison_commande" EntityType="Self.Livraison_commande" />
           <EntitySet Name="Produit" EntityType="Self.Produit" />
           <EntitySet Name="Produit_Commande" EntityType="Self.Produit_Commande" />
           <EntitySet Name="Profil" EntityType="Self.Profil" />
-          <EntitySet Name="Region" EntityType="Self.Region" />
-          <EntitySet Name="service" EntityType="Self.service" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TokenPasswordUser" EntityType="Self.TokenPasswordUser" />
           <EntitySet Name="Type_livraison" EntityType="Self.Type_livraison" />
@@ -1515,10 +1367,6 @@
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="Adresse" EntitySet="Adresse" />
           </AssociationSet>
-          <AssociationSet Name="FK_Implantation_adresse" Association="Self.FK_Implantation_adresse">
-            <End Role="Adresse" EntitySet="Adresse" />
-            <End Role="Implantation" EntitySet="Implantation" />
-          </AssociationSet>
           <AssociationSet Name="FK_Client_Utilisateur" Association="Self.FK_Client_Utilisateur">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="Client" EntitySet="Client" />
@@ -1530,6 +1378,10 @@
           <AssociationSet Name="FK_Commandes_Client" Association="Self.FK_Commandes_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Commandes" EntitySet="Commandes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fidelite_Client_Client" Association="Self.FK_Fidelite_Client_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Fidelite_Client" EntitySet="Fidelite_Client" />
           </AssociationSet>
           <AssociationSet Name="FK_Commandes_Etat" Association="Self.FK_Commandes_Etat">
             <End Role="Etat" EntitySet="Etat" />
@@ -1547,10 +1399,6 @@
             <End Role="Commandes" EntitySet="Commandes" />
             <End Role="Produit_Commande" EntitySet="Produit_Commande" />
           </AssociationSet>
-          <AssociationSet Name="FK_Commune_Region" Association="Self.FK_Commune_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Commune" EntitySet="Commune" />
-          </AssociationSet>
           <AssociationSet Name="FK_Disponibilite_produit_Disponibilite" Association="Self.FK_Disponibilite_produit_Disponibilite">
             <End Role="Disponibilite" EntitySet="Disponibilite" />
             <End Role="Disponibilite_produit" EntitySet="Disponibilite_produit" />
@@ -1559,24 +1407,20 @@
             <End Role="Produit" EntitySet="Produit" />
             <End Role="Disponibilite_produit" EntitySet="Disponibilite_produit" />
           </AssociationSet>
-          <AssociationSet Name="FK_employee_service" Association="Self.FK_employee_service">
-            <End Role="service" EntitySet="service" />
-            <End Role="employee" EntitySet="employee" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_employee_utilisateur_created_by" Association="Self.Fk_employee_utilisateur_created_by">
+          <AssociationSet Name="FK_Employe_Utilisateur" Association="Self.FK_Employe_Utilisateur">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="employee" EntitySet="employee" />
+            <End Role="Employe" EntitySet="Employe" />
           </AssociationSet>
-          <AssociationSet Name="FK_employee_utilisateur_id_responsable" Association="Self.FK_employee_utilisateur_id_responsable">
+          <AssociationSet Name="FK_Employe_Utilisateur_Created_by" Association="Self.FK_Employe_Utilisateur_Created_by">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="employee" EntitySet="employee" />
+            <End Role="Employe" EntitySet="Employe" />
           </AssociationSet>
-          <AssociationSet Name="FK_Fidelite_employee" Association="Self.FK_Fidelite_employee">
-            <End Role="employee" EntitySet="employee" />
+          <AssociationSet Name="FK_Fidelite_Employe" Association="Self.FK_Fidelite_Employe">
+            <End Role="Employe" EntitySet="Employe" />
             <End Role="Fidelite" EntitySet="Fidelite" />
           </AssociationSet>
-          <AssociationSet Name="FK_Fidelite_employee1" Association="Self.FK_Fidelite_employee1">
-            <End Role="employee" EntitySet="employee" />
+          <AssociationSet Name="FK_Fidelite_Employe1" Association="Self.FK_Fidelite_Employe1">
+            <End Role="Employe" EntitySet="Employe" />
             <End Role="Fidelite" EntitySet="Fidelite" />
           </AssociationSet>
           <AssociationSet Name="FK__Utilisateu__etat" Association="Self.FK__Utilisateu__etat">
@@ -1595,13 +1439,13 @@
             <End Role="Produit" EntitySet="Produit" />
             <End Role="Etat_Produit" EntitySet="Etat_Produit" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fidelite_Client_Fidelite" Association="Self.FK_Fidelite_Client_Fidelite">
+            <End Role="Fidelite" EntitySet="Fidelite" />
+            <End Role="Fidelite_Client" EntitySet="Fidelite_Client" />
+          </AssociationSet>
           <AssociationSet Name="FK_Utilisateur_Genre" Association="Self.FK_Utilisateur_Genre">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Utilisateur" EntitySet="Utilisateur" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Implantation_utilisateur" Association="Self.FK_Implantation_utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Implantation" EntitySet="Implantation" />
           </AssociationSet>
           <AssociationSet Name="FK__Livraison__Type_Livraison" Association="Self.FK__Livraison__Type_Livraison">
             <End Role="Type_livraison" EntitySet="Type_livraison" />
@@ -1618,10 +1462,6 @@
           <AssociationSet Name="FK_User_Profil_Profil" Association="Self.FK_User_Profil_Profil">
             <End Role="Profil" EntitySet="Profil" />
             <End Role="User_Profil" EntitySet="User_Profil" />
-          </AssociationSet>
-          <AssociationSet Name="FK_service_utilisateur" Association="Self.FK_service_utilisateur">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="service" EntitySet="service" />
           </AssociationSet>
           <AssociationSet Name="FK__TokenPass_Utilisateur" Association="Self.FK__TokenPass_Utilisateur">
             <End Role="Utilisateur" EntitySet="Utilisateur" />
@@ -1681,8 +1521,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="codePostale" ColumnName="codePostale" />
                 <ScalarProperty Name="ville" ColumnName="ville" />
-                <ScalarProperty Name="id_region" ColumnName="id_region" />
-                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1707,13 +1545,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="employee">
-            <EntityTypeMapping TypeName="GestionCommandeModel.employee">
-              <MappingFragment StoreEntitySet="employee">
+          <EntitySetMapping Name="Employe">
+            <EntityTypeMapping TypeName="GestionCommandeModel.Employe">
+              <MappingFragment StoreEntitySet="Employe">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
-                <ScalarProperty Name="id_responsable" ColumnName="id_responsable" />
-                <ScalarProperty Name="id_service" ColumnName="id_service" />
                 <ScalarProperty Name="date_crea" ColumnName="date_crea" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
               </MappingFragment>
@@ -1725,7 +1561,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="libelle" ColumnName="libelle" />
                 <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1735,8 +1570,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_etat" ColumnName="id_etat" />
                 <ScalarProperty Name="id_produit" ColumnName="id_produit" />
-                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1766,23 +1599,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Fidelite_Client">
+            <EntityTypeMapping TypeName="GestionCommandeModel.Fidelite_Client">
+              <MappingFragment StoreEntitySet="Fidelite_Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_fidelite" ColumnName="id_fidelite" />
+                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Genre">
             <EntityTypeMapping TypeName="GestionCommandeModel.Genre">
               <MappingFragment StoreEntitySet="Genre">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="libelle_genre" ColumnName="libelle_genre" />
                 <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Implantation">
-            <EntityTypeMapping TypeName="GestionCommandeModel.Implantation">
-              <MappingFragment StoreEntitySet="Implantation">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
-                <ScalarProperty Name="adresse_id" ColumnName="adresse_id" />
-                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1811,7 +1643,7 @@
               <MappingFragment StoreEntitySet="Produit">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="libelle_produit" ColumnName="libelle_produit" />
-                <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
                 <ScalarProperty Name="reduction_pourcentage" ColumnName="reduction_pourcentage" />
                 <ScalarProperty Name="reduction_euro" ColumnName="reduction_euro" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -1828,7 +1660,6 @@
                 <ScalarProperty Name="id_commande" ColumnName="id_commande" />
                 <ScalarProperty Name="id_produit" ColumnName="id_produit" />
                 <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-                <ScalarProperty Name="prix" ColumnName="prix" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1838,26 +1669,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="libelle_profil" ColumnName="libelle_profil" />
                 <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Region">
-            <EntityTypeMapping TypeName="GestionCommandeModel.Region">
-              <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="libelle" ColumnName="libelle" />
-                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="service">
-            <EntityTypeMapping TypeName="GestionCommandeModel.service">
-              <MappingFragment StoreEntitySet="service">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="libelle" ColumnName="libelle" />
-                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
-                <ScalarProperty Name="date_crea" ColumnName="date_crea" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

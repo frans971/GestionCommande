@@ -26,10 +26,8 @@ namespace GestionCommande.Models.Entity
             this.Client = new HashSet<Client>();
             this.Client1 = new HashSet<Client>();
             this.Commandes = new HashSet<Commandes>();
-            this.employee = new HashSet<employee>();
-            this.employee1 = new HashSet<employee>();
-            this.Implantation = new HashSet<Implantation>();
-            this.service = new HashSet<service>();
+            this.Employe = new HashSet<Employe>();
+            this.Employe1 = new HashSet<Employe>();
             this.TokenPasswordUser = new HashSet<TokenPasswordUser>();
             this.User_Profil = new HashSet<User_Profil>();
         }
@@ -77,15 +75,11 @@ namespace GestionCommande.Models.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commandes> Commandes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee { get; set; }
+        public virtual ICollection<Employe> Employe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee1 { get; set; }
+        public virtual ICollection<Employe> Employe1 { get; set; }
         public virtual Etat Etat { get; set; }
         public virtual Genre Genre { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Implantation> Implantation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<service> service { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TokenPasswordUser> TokenPasswordUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
