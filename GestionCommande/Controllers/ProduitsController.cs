@@ -35,6 +35,8 @@ namespace GestionCommande.Controllers
 
             HttpCookie cookie = new HttpCookie("page", page.ToString());
             HttpContext.Response.Cookies.Add(cookie);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.pageEnCours = page;
             return View(resultat.ToList());
         }
 

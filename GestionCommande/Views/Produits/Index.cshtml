@@ -9,6 +9,68 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="container pb-md-5">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card p-2 mb-2">
+                    <img class="card-img-top" src="https://media.istockphoto.com/id/1279877169/fr/vectoriel/logo-dr%C3%B4le-de-dessin-anim%C3%A9-dun-boucher-avec-le-steak-et-le-couteau.jpg?s=612x612&w=0&k=20&c=wc_7WMGQgurOFf271Pk8ZuNqaU8WcVO7U-6H7TYRzJ4=" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.libelle_produit</h5>
+                        <p class="card-text">@item.description</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div class="m-lg-5">
+    <nav aria-label="...">
+        <ul class="pagination">
+            @if (ViewBag.TotalPages == 1 && ViewBag.pageEnCours == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1">Précédent</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Produits",ViewBag.pageEnCours-1)" tabindex="-1">Précédent</a>
+                </li>
+            }
+
+            @if (ViewBag.pageEnCours > 1)
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Produit",ViewBag.pageEnCours-1)">@ViewBag.pageEnCours-1</a></li>
+            }
+            else
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="@Url.Action("Index", "Produit",ViewBag.pageEnCours-1)">@ViewBag.pageEnCours<span class="sr-only">(current)</span></a>
+                </li>
+            }
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+
+
 <table class="table">
     <tr>
         <th>
