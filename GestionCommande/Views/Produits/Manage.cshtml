@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GestionCommande.Models.Entity.Produit>
+
+@{
+    ViewBag.Title = "Manage";
+}
+
+
+
+<table class="table table-bordered table-responsive" id="tableProduct">
+    <thead>
+        <tr>
+            <th>
+                N°
+            </th>
+            <th>
+                Nom du produit
+            </th>
+            <th>
+                Prix
+            </th>
+            <th>
+                Etat
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.libelle_produit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etat.libelle)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Voir", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script>
+		$(document).ready(function () {
+			$('#tableProduct').DataTable({
+				"lengthChange": false,
+				"bInfo": false,
+				//"bPaginate": false,
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/fr-FR.json',
+				}
+			});
+		});
+	
+    </script>
+
+}
+

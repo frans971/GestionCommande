@@ -27,7 +27,6 @@ namespace GestionCommande.Controllers
             List<Produit> resultat = new List<Produit>();
             foreach(var item in pagination)
             {
-                
                 resultat.Add(item);
             }
             // a generaliser pour que le calcul se fasse dynamiquement 
@@ -38,6 +37,11 @@ namespace GestionCommande.Controllers
             ViewBag.TotalPages = totalPages;
             ViewBag.pageEnCours = page;
             return View(resultat.ToList());
+        }
+
+        public ActionResult Manage()
+        {
+            return View(db.Produit.ToList());
         }
 
         // GET: Produits/Details/5

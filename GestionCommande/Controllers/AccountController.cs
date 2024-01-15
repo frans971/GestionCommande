@@ -239,7 +239,7 @@ namespace GestionCommande.Controllers
                 {
                     //on change le mot de passe 
                     utilisateurModify.password = GethashPassword(utilisateur.password);
-                    utilisateurModify.date_modif = DateTime.Now.Date;
+                    utilisateurModify.date_modif = DateTime.Now;
                     entityUtilisateur.ModifyUtilisateur(utilisateurModify);
                     tokenUtilisateur.validDate = DateTime.Now;
                     entityTokenPasswordUser.ModifyTokenUser(tokenUtilisateur);
