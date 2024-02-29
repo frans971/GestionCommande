@@ -310,6 +310,10 @@
     <Content Include="Content\Style\Bootsrap\bootstrap.rtl.css" />
     <Content Include="Content\Style\Bootsrap\bootstrap.rtl.min.css" />
     <Content Include="Content\BoucherieLogo.png" />
+    <Content Include="Content\Style\Datatable\datatables.min.css" />
+    <Content Include="Content\Style\Select2\select2-bootstrap-5-theme.min.css" />
+    <Content Include="Content\Style\Select2\select2-bootstrap-5-theme.rtl.min.css" />
+    <Content Include="Content\Style\Select2\select2.min.css" />
     <Content Include="Content\validation.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -361,6 +365,7 @@
     <Content Include="Scripts\Bootstrap\bootstrap.js.map" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js.map" />
+    <Content Include="Scripts\Datatable\datatable.min.js" />
     <Content Include="Scripts\Fontawesome\All.js" />
     <Content Include="Scripts\Jquery\jquery-3.7.1.js" />
     <Content Include="Scripts\Jquery\jquery-3.7.1.min.js" />
@@ -373,6 +378,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Select2\select2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -402,7 +408,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Style\Select2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -11,7 +11,8 @@ namespace GestionCommande.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Produit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +24,24 @@ namespace GestionCommande.Models.Entity
         }
     
         public int id { get; set; }
+
+        [DisplayName("Nom du produit :")]
         public string libelle_produit { get; set; }
+
+        [DisplayName("Prix :")]
         public Nullable<decimal> prix { get; set; }
+
+        [DisplayName("Réduction à appliquer (en %) :")]
         public Nullable<int> reduction_pourcentage { get; set; }
+
+        [DisplayName("Réduction à appliquer (en €) :")]
         public Nullable<decimal> reduction_euro { get; set; }
+
+        [DisplayName("Description du produit :")]
         public string description { get; set; }
         public string image { get; set; }
+
+        [DisplayName("Statut du produit :")]
         public int id_etat { get; set; }
         public System.DateTime date_crea { get; set; }
     
