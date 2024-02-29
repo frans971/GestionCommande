@@ -24,19 +24,19 @@ namespace GestionCommande.Controllers
             var test = db.Produit.ToList();
             var pagination = test.Skip((page - 1) * 12).Take(12);
             
-            List<Produit> resultat = new List<Produit>();
+            List<Produit> produits = new List<Produit>();
             foreach(var item in pagination)
             {
-                resultat.Add(item);
+                produits.Add(item);
             }
             // a generaliser pour que le calcul se fasse dynamiquement 
-            int totalPages = (int)Math.Ceiling((double) 127 / 12);
+            int totalPages = (int)Math.Ceiling((double)produits.Count() / 12);
 
             HttpCookie cookie = new HttpCookie("page", page.ToString());
             HttpContext.Response.Cookies.Add(cookie);
             ViewBag.TotalPages = totalPages;
             ViewBag.pageEnCours = page;
-            return View(resultat.ToList());
+            return View(produits.ToList());
         }
 
         public ActionResult Manage()

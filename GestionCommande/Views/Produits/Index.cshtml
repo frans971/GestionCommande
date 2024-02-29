@@ -32,7 +32,7 @@
             @if (ViewBag.TotalPages == 1 && ViewBag.pageEnCours == 1)
             {
                 <li class="page-item disabled">
-                    <a class="page-link" href="" tabindex="-1">Précédent</a>
+                    <a class="page-link disabled" href="" tabindex="-1">Précédent</a>
                 </li>
             }
             else
@@ -43,21 +43,22 @@
                 </li>
             }
 
-            @for (int i = 1; i < ViewBag.TotalPages+1; i++)
-            {
-                if (i == ViewBag.pageEnCours)
-                {
-                    <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Produits")?page=@i">@i</a></li>
-                }
-                else
-                {
-                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Produits")?page=@i">@i</a></li>
-                }
-
-             }
 
             @if (ViewBag.TotalPages > 1)
             {
+                for (int i = 1; i < ViewBag.TotalPages + 1; i++)
+                {
+                    if (i == ViewBag.pageEnCours)
+                    {
+                        <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Produits")?page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Produits")?page=@i">@i</a></li>
+                    }
+
+                }
+
             }
             else
             {
@@ -70,7 +71,7 @@
             @if (ViewBag.TotalPages == ViewBag.pageEnCours)
             {
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">Suivant</a>
+                    <a class="page-link disabled" href="#" >Suivant</a>
                 </li>
             }
             else
