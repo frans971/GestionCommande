@@ -293,23 +293,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.rtl.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.min.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.rtl.css" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.rtl.min.css" />
     <Content Include="Content\BoucherieLogo.png" />
+    <Content Include="Content\Style\Datatable\datatables.min.css" />
+    <Content Include="Content\Style\Select2\select2-bootstrap-5-theme.min.css" />
+    <Content Include="Content\Style\Select2\select2-bootstrap-5-theme.rtl.min.css" />
+    <Content Include="Content\Style\Select2\select2.min.css" />
     <Content Include="Content\validation.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -324,7 +328,6 @@
       <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
       <LastGenOutput>GestionCommandeEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\BDD\GestionCommande.sql" />
     <EntityDeploy Include="Models\Entity\GestionCommandeEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GestionCommandeEntities.Designer.cs</LastGenOutput>
@@ -332,23 +335,50 @@
     <Content Include="Models\Entity\GestionCommandeEntities.edmx.diagram">
       <DependentUpon>GestionCommandeEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.7.1.js" />
-    <Content Include="Scripts\jquery-3.7.1.min.js" />
-    <Content Include="Scripts\jquery-3.7.1.slim.js" />
-    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.rtl.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-utilities.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-reboot.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.min.css.map" />
+    <Content Include="Content\Style\Bootsrap\bootstrap-grid.css.map" />
+    <Content Include="Content\Style\Jquery\jquery-3.5.1.js" />
+    <Content Include="Scripts\BDD\GestionCommande.sql" />
+    <Content Include="Scripts\Bootstrap\bootstrap.bundle.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\Bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\Bootstrap\bootstrap.esm.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.esm.js.map" />
+    <Content Include="Scripts\Bootstrap\bootstrap.esm.min.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\Bootstrap\bootstrap.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.js.map" />
+    <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.min.js.map" />
+    <Content Include="Scripts\Datatable\datatable.min.js" />
+    <Content Include="Scripts\Fontawesome\All.js" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.js" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.min.map" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\Jquery\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\Jquery\jquery.validate.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.min.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Select2\select2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -380,31 +410,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="Scripts\bootstrap.esm.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <None Include="Scripts\Jquery\jquery-3.7.1.intellisense.js" />
+    <None Include="Scripts\Jquery\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
