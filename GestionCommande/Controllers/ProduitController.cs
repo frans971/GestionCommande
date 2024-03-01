@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GestionCommande.Models.Entity;
+using GestionCommande.Services.Upload;
 
 namespace GestionCommande.Controllers
 {
@@ -75,6 +76,8 @@ namespace GestionCommande.Controllers
         {
             try
             {
+                Upload upload= new Upload();
+                upload.RegisterToFTP(produit.item_img_upload, produit.libelle_produit);
                 ViewBag.id_etat = new SelectList(db.Etat, "id", "libelle", produit.id_etat);
                 if (ModelState.IsValid)
                 {
