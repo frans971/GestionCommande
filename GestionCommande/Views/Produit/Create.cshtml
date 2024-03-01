@@ -28,7 +28,7 @@
         </div>
         <div class="mt-md-5 mx-3">
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Create", "Produit",FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -84,8 +84,7 @@
                 <div class="form-group mt-2">
                     @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                        @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.item_img_upload, new { type = "file", @accept = "image/png, image/jpeg", @class = "form-control" })
                     </div>
                 </div>
 

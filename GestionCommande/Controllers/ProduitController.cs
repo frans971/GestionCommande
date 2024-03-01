@@ -71,7 +71,7 @@ namespace GestionCommande.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,libelle_produit,prix,reduction_pourcentage,reduction_euro,description,image,id_etat,date_crea")] Produit produit)
+        public ActionResult Create(Produit produit)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace GestionCommande.Controllers
                 {
                     // ajout d'une date de création du sur le produit
                     produit.date_crea = DateTime.Now;
-
+                        
                     // ajouter une image dans un répertoire FTP via une classe service 
                     
                     //Pour tester récuperer l'image créer sur le serveur ftp

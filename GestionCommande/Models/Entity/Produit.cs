@@ -13,6 +13,7 @@ namespace GestionCommande.Models.Entity
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class Produit
     {
@@ -44,12 +45,16 @@ namespace GestionCommande.Models.Entity
         [Required(AllowEmptyStrings = false, ErrorMessage = "La description du produit est obligatoire")]
         public string description { get; set; }
 
+        public HttpPostedFileBase item_img_upload { get; set; }
+
         [DisplayName("Image du produit :")]
         public string image { get; set; }
 
         [DisplayName("Statut du produit :")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Il est obligatoire d'indiquer un statut au produit")]
         public int id_etat { get; set; }
+
+        [DisplayName("Date de création :")]
         public System.DateTime date_crea { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
