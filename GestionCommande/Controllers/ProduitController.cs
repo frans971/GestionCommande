@@ -11,7 +11,7 @@ using GestionCommande.Models.Entity;
 
 namespace GestionCommande.Controllers
 {
-    public class ProduitsController : Controller
+    public class ProduitController : Controller
     {
         private GestionCommandeEntities db = new GestionCommandeEntities();
 
@@ -73,14 +73,28 @@ namespace GestionCommande.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,libelle_produit,prix,reduction_pourcentage,reduction_euro,description,image,id_etat,date_crea")] Produit produit)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Produit.Add(produit);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                ViewBag.id_etat = new SelectList(db.Etat, "id", "libelle", produit.id_etat);
+                if (ModelState.IsValid)
+                {
+                    // ajout d'une date de création du sur le produit
+                    produit.date_crea = DateTime.Now;
 
-            ViewBag.id_etat = new SelectList(db.Etat, "id", "libelle", produit.id_etat);
+                    // ajouter une image dans un répertoire FTP via une classe service 
+                    
+                    //Pour tester récuperer l'image créer sur le serveur ftp
+
+                    db.Produit.Add(produit);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch(Exception ex)
+            {
+                //enregistrer dans un fichier de log une traçabilité de l'utilisateur
+                // qui a essayer de créer un produit (il faut créer une classe service avec un appel asynchone
+            }
             return View(produit);
         }
 

@@ -12,6 +12,7 @@ namespace GestionCommande.Models.Entity
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Produit
     {
@@ -26,9 +27,11 @@ namespace GestionCommande.Models.Entity
         public int id { get; set; }
 
         [DisplayName("Nom du produit :")]
+        [Required(AllowEmptyStrings =false ,ErrorMessage ="Le libellé du produit est obligatoire")]
         public string libelle_produit { get; set; }
 
         [DisplayName("Prix :")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Le prix du produit est obligatoire")]
         public Nullable<decimal> prix { get; set; }
 
         [DisplayName("Réduction à appliquer (en %) :")]
@@ -38,10 +41,14 @@ namespace GestionCommande.Models.Entity
         public Nullable<decimal> reduction_euro { get; set; }
 
         [DisplayName("Description du produit :")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "La description du produit est obligatoire")]
         public string description { get; set; }
+
+        [DisplayName("Image du produit :")]
         public string image { get; set; }
 
         [DisplayName("Statut du produit :")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Il est obligatoire d'indiquer un statut au produit")]
         public int id_etat { get; set; }
         public System.DateTime date_crea { get; set; }
     
