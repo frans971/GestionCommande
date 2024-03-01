@@ -42,7 +42,7 @@
                             <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Produits")">Nos Produits</a>
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Produit")">Nos Produits</a>
                         </li>
                         @if (!User.Identity.Name.IsEmpty())
                         {
@@ -62,7 +62,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Utilisateur</a></li>
-                                    <li><a class="dropdown-item" href="@Url.Action("Manage", "Produits")">Gestion des produits</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Manage", "Produit")">Gestion des produits</a></li>
                                     <li></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>

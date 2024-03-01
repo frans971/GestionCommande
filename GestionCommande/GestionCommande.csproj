@@ -193,7 +193,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProduitsController.cs" />
+    <Compile Include="Controllers\ProduitController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -399,12 +399,12 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Utilisateur\Details.cshtml" />
-    <Content Include="Views\Produits\Create.cshtml" />
-    <Content Include="Views\Produits\Delete.cshtml" />
-    <Content Include="Views\Produits\Details.cshtml" />
-    <Content Include="Views\Produits\Edit.cshtml" />
-    <Content Include="Views\Produits\Index.cshtml" />
-    <Content Include="Views\Produits\Manage.cshtml" />
+    <Content Include="Views\Produit\Create.cshtml" />
+    <Content Include="Views\Produit\Delete.cshtml" />
+    <Content Include="Views\Produit\Details.cshtml" />
+    <Content Include="Views\Produit\Edit.cshtml" />
+    <Content Include="Views\Produit\Index.cshtml" />
+    <Content Include="Views\Produit\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,14 +5,28 @@
 }
 
 <div class="row">
-    <div class="col-3" id="image-zone" style="background-color:antiquewhite">
-
+    <div class="col-3" id="image-zone">
+        <div class="m-2 h-100 d-flex align-items-center justify-content-center">
+            <div class="row ">
+                <div class="col-md-12 text-center mb-2">
+                    <h2 class="h3">Image du produit :</h2>
+                </div>
+                <div class="col-md-12 text-center mb-5">
+                    <img id="img_product" src="https://www.lego.com/cdn/cs/set/assets/blt10881331a51d7568/60076.jpg?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1" class="rounded img-fluid" alt="image Uploader" width="400" height="400" />
+                </div>
+                <div class="col-md-12 text-center align-self-end">
+                    <button class="btn btn-outline-danger">Supprimer l'image</button>
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
     <div class="col-md-9">
         <div class="justify-content-center">
             <h2 class="h2 text-center"><ins>Ajouter un nouvau produit</ins></h2>
         </div>
-        <div class="mt-md-5">
+        <div class="mt-md-5 mx-3">
 
             @using (Html.BeginForm())
             {
@@ -22,7 +36,7 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.libelle_produit, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.libelle_produit, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.libelle_produit, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.libelle_produit, "", new { @class = "text-danger" })
@@ -30,7 +44,7 @@
                 </div>
 
                 <div class="form-group mt-2">
-                    @Html.LabelFor(model => model.prix, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.prix, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                     <div class="col-md-3">
                         @Html.EditorFor(model => model.prix, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.prix, "", new { @class = "text-danger" })
@@ -48,13 +62,19 @@
                 <div class="form-group mt-2">
                     @Html.LabelFor(model => model.reduction_euro, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.reduction_euro, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.reduction_euro, new { htmlAttributes = new { @class = "form-control", type="number" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text"><strong>€</strong> </span>
+                            </div>
+                        </div>
+                        
                         @Html.ValidationMessageFor(model => model.reduction_euro, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group mt-2">
-                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.description, new { @class = "form-control", rows = "4", maxlength = "50" } )
                         @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
@@ -64,31 +84,27 @@
                 <div class="form-group mt-2">
                     @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", type = "file" } })
                         @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group mt-2">
                     @Html.LabelFor(model => model.id_etat, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         @Html.DropDownList("id_etat", null, htmlAttributes: new { @class = "form-select" })
                         @Html.ValidationMessageFor(model => model.id_etat, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-3 text-center">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-info" />
+                        <a class="btn btn-danger" href="@Url.Action("Index","Produit")">Retour</a>
                     </div>
                 </div>
             </div>
             }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-
         </div>
     </div>
 </div>
