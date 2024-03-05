@@ -57,6 +57,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentFTP, Version=49.0.2.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.49.0.2\lib\net472\FluentFTP.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.24.3.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.24.3\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -331,9 +334,10 @@
     </Compile>
     <Compile Include="Models\ViewModel\ClientVM.cs" />
     <Compile Include="Models\ViewModel\UtilisateurVM.cs" />
+    <Compile Include="Services\FTP\Download.cs" />
     <Compile Include="Services\Mail\SendMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Upload\Upload.cs" />
+    <Compile Include="Services\FTP\Upload.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Style\Bootsrap\bootstrap-grid.css" />

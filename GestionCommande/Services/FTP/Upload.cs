@@ -15,13 +15,13 @@ namespace GestionCommande.Services.Upload
 {
     public class Upload
     {
-        public void RegisterToFTP(HttpPostedFileBase fichier, string produit_name)
+        public string RegisterToFTP(HttpPostedFileBase fichier, string name)
         {
             try
             {
                 var ftpUsername = ConfigurationManager.AppSettings["FTPIdentifiant"];
                 var ftpPassword = ConfigurationManager.AppSettings["FTPPassword"];
-                string cheminLocal = StockTempFileToContent(fichier, produit_name);
+                string cheminLocal = StockTempFileToContent(fichier, name);
 
                 // Adresse du serveur FTP et chemin du dossier sur le serveur où vous souhaitez téléverser le fichier
                 string adresseServeurFTP = "ftp://ftp.cluster029.hosting.ovh.net/";
@@ -30,11 +30,11 @@ namespace GestionCommande.Services.Upload
                 // TODO :  il faut renommer le nom du fichier qui servira a stocker l'image 
                 //Trouver une solution pour que cette fonction s'adapte si c'est une image ou si 
                 // c'est sur un document pdf /doc
-                string cheminSurServeur = "nouveau/"; 
+                string cheminSurServeur = "GestionCommande/"; 
 
                 // Composez le chemin complet sur le serveur FTP
                 string cheminServeur = adresseServeurFTP + cheminSurServeur
-                    + DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + produit_name
+                    + DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + name
                     + Path.GetExtension(fichier.FileName);
 
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(cheminServeur);
@@ -55,16 +55,21 @@ namespace GestionCommande.Services.Upload
                         ftpStream.Write(buffer, 0, bytesRead);
                     }
                 }
+                DeleteTempFileInContent(cheminLocal);
+                return cheminSurServeur
+                    + DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + name
+                    + Path.GetExtension(fichier.FileName);
             }
             catch (Exception ex)
             {
                 //Ecrire un message de log dans un fichier le cas échéant
             }
+            return null; 
         }
         // methode pour stoker provisoirement le un fichier dans le dossier content
         
 
-        private string StockTempFileToContent (HttpPostedFileBase fichier, string produit_name)
+        private string StockTempFileToContent (HttpPostedFileBase fichier, string name)
         {
             try
             {
@@ -73,7 +78,7 @@ namespace GestionCommande.Services.Upload
                     Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Content\\Upload\\");
                 }
                 //string extension = Path.GetExtension(file.FileName);
-                string nomFichier = DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + produit_name;
+                string nomFichier = DateTime.Now.Date.ToString("dd-MM-yyyy") + "_" + name;
                 fichier.SaveAs(HostingEnvironment.MapPath("~/Content/") + nomFichier);
                 return AppDomain.CurrentDomain.BaseDirectory + "Content\\Upload\\" + nomFichier + Path.GetExtension(fichier.FileName);
             }
@@ -83,5 +88,16 @@ namespace GestionCommande.Services.Upload
             }
             return null;
         }
+        private void DeleteTempFileInContent(string path)
+        {
+            if (File.Exists(Path.Combine(path)))
+            {
+                // If file found, delete it
+                File.Delete(Path.Combine(path));
+                Console.WriteLine("File deleted.");
+            }
+            else Console.WriteLine("File not found");
+        }
     }
+   
 }
