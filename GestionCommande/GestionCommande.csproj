@@ -425,6 +425,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\BDD\script.sql" />
     <Content Include="Scripts\Select2\select2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -458,6 +459,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Scripts\BDD\GestionCommande.bak" />
     <None Include="Scripts\Jquery\jquery-3.7.1.intellisense.js" />
     <None Include="Scripts\Jquery\jquery.validate-vsdoc.js" />
   </ItemGroup>
